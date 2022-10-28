@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 
 <head>
-   <?php include '.././view/head.php'; ?>
+   <?php include 'parts/head.php'; ?>
    <link rel="stylesheet" href="../css/calendar.css">
 </head>
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION['loggedin'])) {
 <body>
 
    <div>
-      <?php include '.././view/navbar.php'; ?>
+      <?php include 'parts/navbar.php'; ?>
       <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64 pb-8">
          <div class="calendar" id="calendar-app">
             <div class="calendar--day-view" id="day-view">

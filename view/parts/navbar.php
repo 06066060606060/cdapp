@@ -47,7 +47,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./logout.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                    <a href=".././controllers/logout.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-arrow-right-from-bracket"></i>
                                         <span class="ml-3 flex-1 whitespace-nowrap">Logout</span>
                                     </a>

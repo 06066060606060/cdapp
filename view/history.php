@@ -10,11 +10,11 @@ if (!isset($_SESSION['loggedin'])) {
 <!DOCTYPE html>
 <html>
 <head>
-<?php include '.././view/head.php'; ?>
+<?php include 'parts/head.php'; ?>
 </head>
 <body>
 
-   <?php include '.././view/navbar.php'; ?>
+   <?php include 'parts/navbar.php'; ?>
             <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                 <main>
                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
@@ -35,7 +35,7 @@ if (!isset($_SESSION['loggedin'])) {
                                                         Temps de travail
                                                     </th>
                                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Date & Heure
+                                                        Date
                                                     </th>
                                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Gain
@@ -45,13 +45,13 @@ if (!isset($_SESSION['loggedin'])) {
                                             <tbody class="bg-white">
                                                 <tr>
                                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                        Payment from <span class="font-semibold">Bonnie Green</span>
+                                                         <span class="font-semibold">4 Heures</span>
                                                     </td>
                                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                        Apr 23 ,2021
+                                                        21 Octobre 2022
                                                     </td>
                                                     <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                        $2300
+                                                        300 €
                                                     </td>
                                                 </tr>
                                             </tbody>

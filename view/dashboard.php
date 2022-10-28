@@ -14,21 +14,21 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 
 <head>
-<?php include '.././view/head.php'; ?>
+<?php include 'parts/head.php'; ?>
 </head>
 
 <body>
 
 <div>
-<?php include '.././view/navbar.php'; ?>
+<?php include 'parts/navbar.php'; ?>
       <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
          <main>
             <div class="pt-6 px-4">
                <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
 
-                 <?php include '.././view/graph.php'; ?>
+                 <?php include 'graph.php'; ?>
 
-                  <?php include '.././view/small_history.php'; ?>
+                  <?php include 'small_history.php'; ?>
                </div>
                <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                   <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4">

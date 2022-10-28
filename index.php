@@ -1,4 +1,4 @@
 <?php
-include 'view/head.php';
-require_once('controllers/login.php');
+include 'view/parts/head.php';
+require_once('view/login.php');
 ?>
