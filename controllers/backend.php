@@ -20,16 +20,6 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 
 <body>
-<<<<<<< HEAD
-<div class="back"></div>
-    <div class="container">
-        <div class="navbarb">
-        <div id="btnnewpost"><a href="./logout.php" >Se Déconnecter</a></div>
-        <p style="font-size: 18px; padding:10px; color:black">Salut, <?=$_SESSION['name']?></p> 
-      
-        </div>
-    </div>
-=======
 <!-- component -->
 <!-- This is an example component -->
 <div>
@@ -309,7 +299,6 @@ if (!isset($_SESSION['loggedin'])) {
    <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 </div>
 
->>>>>>> dd36841a6f724987433d8e6f6f943a63a9fc7552
 </body>
 
 </html>

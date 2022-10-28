@@ -48,7 +48,6 @@ date_default_timezone_set('Europe/Paris');
 
     </div>
 
-<<<<<<< HEAD
       <div>
     <h1>Login</h1>
     <form action="./controllers/authenticate.php" method="post">
@@ -62,8 +61,6 @@ date_default_timezone_set('Europe/Paris');
     </form>
   </div>
     
-=======
->>>>>>> dd36841a6f724987433d8e6f6f943a63a9fc7552
 </body>
 
 </html>
