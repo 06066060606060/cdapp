@@ -20,15 +20,6 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 
 <body>
-<!-- <div class="back"></div>
-    <div class="container">
-        <div class="navbarb">
-        <div id="btnnewpost"><a href="./logout.php" style="color: white">Se Déconnecter</a></div>
-        <p style="font-size: 18px; padding:10px; color:black">Salut, <?=$_SESSION['name']?></p> 
-      
-        </div>
-    </div> -->
-
 <!-- component -->
 <!-- This is an example component -->
 <div>
@@ -107,7 +98,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
                      </li>
                      <li>
-                        <a href="#" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                        <a href="./logout.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                            <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-arrow-right-from-bracket"></i>
                            <span class="ml-3 flex-1 whitespace-nowrap">Logout</span>
                         </a>
