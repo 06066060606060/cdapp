@@ -28,7 +28,7 @@ date_default_timezone_set('Europe/Paris');
 
       <div class="min-h-1/2 bg-gray-100 border border-gray-300 rounded-2xl shadow-xl">
         <form action="./controllers/authenticate.php" method="post">
-          <div class="mx-4 sm:mx-24 md:mx-34 lg:mx-56 mx-auto  flex items-center space-y-4 py-16 font-semibold text-gray-900 flex-col">
+          <div class=" mx-4 sm:mx-24 md:mx-34 lg:mx-56 ms:mx-auto  flex items-center space-y-4 py-16 font-semibold text-gray-900 flex-col">
 
             <h1 class="text-gray-900 text-2xl">Login</h1>
 
