@@ -21,7 +21,7 @@ if (!isset($_SESSION['loggedin'])) {
 <div class="back"></div>
     <div class="container">
         <div class="navbarb">
-        <div id="btnnewpost"><a href="./logout.php" style="color: white">Se Déconnecter</a></div>
+        <div id="btnnewpost"><a href="./logout.php" >Se Déconnecter</a></div>
         <p style="font-size: 18px; padding:10px; color:black">Salut, <?=$_SESSION['name']?></p> 
       
         </div>

@@ -24,7 +24,7 @@ date_default_timezone_set('Europe/Paris');
 
       <div>
     <h1>Login</h1>
-    <form action="/controllers/authenticate.php" method="post">
+    <form action="./controllers/authenticate.php" method="post">
       <label for="username">
       </label>
       <input type="text" name="username" placeholder="Username" id="username" required>
