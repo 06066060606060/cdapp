@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html>
-<?php
-include 'bdd.php';
-setlocale(LC_TIME, 'fr_FR');
-date_default_timezone_set('Europe/Paris');
-
-?>
-
 
 <body>
-  <header>
-
-  </header>
 
   <div class="bg-white">
     <div class="flex min-h-screen items-center justify-center">

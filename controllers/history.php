@@ -9,9 +9,9 @@ if (!isset($_SESSION['loggedin'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
+<head>
 <?php include '.././view/head.php'; ?>
-
+</head>
 <body>
 
    <?php include '.././view/navbar.php'; ?>

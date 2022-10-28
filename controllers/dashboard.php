@@ -1,4 +1,7 @@
 <?php
+
+setlocale(LC_TIME, 'fr_FR');
+date_default_timezone_set('Europe/Paris');
 session_start();
 // If the  not logged redirect to index...
 
@@ -10,7 +13,9 @@ if (!isset($_SESSION['loggedin'])) {
 <!DOCTYPE html>
 <html>
 
+<head>
 <?php include '.././view/head.php'; ?>
+</head>
 
 <body>
 
