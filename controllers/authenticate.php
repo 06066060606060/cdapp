@@ -37,7 +37,7 @@ if (password_verify($_POST['password'], $password)) {  // use BCRYPT
 		$_SESSION['name'] = $_POST['username'];
 		$_SESSION['id'] = $id;
 		echo 'Bienvenue ' . $_SESSION['name'] . '!';
-		header('Location: ./backend.php');
+		header('Location: ./dashboard.php');
 	} else {
 		// Incorrect password
 		echo 'Password incorrect!';
