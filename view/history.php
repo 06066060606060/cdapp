@@ -35,6 +35,9 @@ if (!isset($_SESSION['loggedin'])) {
                                                         Temps de travail
                                                     </th>
                                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Taux horaire
+                                                    </th>
+                                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Date
                                                     </th>
                                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -46,6 +49,9 @@ if (!isset($_SESSION['loggedin'])) {
                                                 <tr>
                                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
                                                          <span class="font-semibold">4 Heures</span>
+                                                    </td>
+                                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                                        75 €
                                                     </td>
                                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                                         21 Octobre 2022

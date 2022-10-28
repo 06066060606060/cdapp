@@ -19,6 +19,9 @@
                                     Temps de travail
                                 </th>
                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Taux horaire
+                                </th>
+                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Date & Heure
                                 </th>
                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -30,6 +33,9 @@
                             <tr>
                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
                                     4 Heures
+                                </td>
+                                <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                    75 €
                                 </td>
                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                     21 octobre 2022

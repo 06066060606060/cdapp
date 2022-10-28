@@ -49,7 +49,7 @@ if (!isset($_SESSION['loggedin'])) {
                         <div class="qtr">
                            <label class="add-event-label">
                               Fin
-                              <input type="text" class="add-event-edit" placeholder="9" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
+                              <input type="text" class="add-event-edit" placeholder="9:00" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
                               <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">
                            </label>
                         </div>

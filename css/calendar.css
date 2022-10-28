@@ -18,8 +18,8 @@
     border-radius: 3px;
     top: 2.5%;
     left: 5%;
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 100%;
     background: rgba(255,255,255,1);
    box-shadow:1px 3px 12px 5px rgba(2,2,2,0.16);
     z-index: 2;
@@ -180,8 +180,8 @@
     cursor: pointer;
   }
   #add-event{
-    color: #04b6e2;
-    border-color: #04b6e2;
+    color: #0026ff;
+    border-color: #0026ff;
   }
   .day-view-exit{
     position: absolute;
@@ -211,7 +211,7 @@
   }
 
   .day-view-date:hover{
-    color: #fff;
+    color: #04b6e2;
   }
   .day-inspiration-quote{
     position: absolute;
@@ -362,7 +362,8 @@
     
   }
   .cview--date:hover::before{
-    background: rgb(0, 114, 125);
+
+    background: rgba(0, 115, 125, 0.361);
   }
   .cview--date.today{
     color: #111;  
@@ -389,6 +390,7 @@
     transform: scale(0.8);
     z-index: 0;
   }
+
   .footer{
     width: 100%;
     bottom: 50px;
@@ -402,4 +404,3 @@
     padding: 2px 5px;
     border-bottom: 1px solid #fff;
   }
-  
