@@ -20,15 +20,6 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 
 <body>
-<!-- <div class="back"></div>
-    <div class="container">
-        <div class="navbarb">
-        <div id="btnnewpost"><a href="./logout.php" style="color: white">Se Déconnecter</a></div>
-        <p style="font-size: 18px; padding:10px; color:black">Salut, <?=$_SESSION['name']?></p> 
-      
-        </div>
-    </div> -->
-
 <!-- component -->
 <!-- This is an example component -->
 <div>
@@ -84,12 +75,12 @@ if (!isset($_SESSION['loggedin'])) {
                                     <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                                  </svg>
                               </div>
-                              <input type="text" name="email" id="mobile-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search">
+                              <input type="text" name="email" id="mobile-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search">
                            </div>
                         </form>
                      </li>
                      <li>
-                        <a href="#" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
+                        <a href="./backend.php" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                            <i class="text-gray-500 group-hover:text-gray-900 transition duration-75 fa-solid fa-chart-pie"></i>
                            <span class="ml-3">Dashboard</span>
                         </a>
@@ -101,13 +92,13 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
                      </li>
                      <li>
-                        <a href="#" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                        <a href="./history.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                            <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-sharp fa-solid fa-clock-rotate-left"></i>
                            <span class="ml-3 flex-1 whitespace-nowrap">Historique</span>
                         </a>
                      </li>
                      <li>
-                        <a href="#" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                        <a href="./logout.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                            <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-arrow-right-from-bracket"></i>
                            <span class="ml-3 flex-1 whitespace-nowrap">Logout</span>
                         </a>
@@ -144,7 +135,7 @@ if (!isset($_SESSION['loggedin'])) {
                            <span class="text-base font-normal text-gray-500">This is a list of latest transactions</span>
                         </div>
                         <div class="flex-shrink-0">
-                           <a href="#" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">View all</a>
+                           <a href="./history.php" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">View all</a>
                         </div>
                      </div>
                      <div class="flex flex-col mt-8">
