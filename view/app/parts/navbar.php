@@ -29,25 +29,25 @@
                         <div class="flex-1 px-3 bg-white divide-y space-y-1">
                             <ul class="space-y-2 pb-2">
                                 <li>
-                                    <a href="./dashboard.php" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
+                                    <a href="./dashboard" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                                         <i class="text-gray-500 group-hover:text-gray-900 transition duration-75 fa-solid fa-chart-pie"></i>
                                         <span class="ml-3">Dashboard</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./calendar.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                    <a href="./calendar" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <i class="text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-calendar-days"></i>
                                         <span class="ml-3 flex-1 whitespace-nowrap">Calendrier</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./history.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                    <a href="./history" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-sharp fa-solid fa-clock-rotate-left"></i>
                                         <span class="ml-3 flex-1 whitespace-nowrap">Historique</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href=".././controllers/logout.php" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                    <a href="./logout" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <i class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-arrow-right-from-bracket"></i>
                                         <span class="ml-3 flex-1 whitespace-nowrap">Logout</span>
                                     </a>
