@@ -2,7 +2,7 @@
     "name": "xmick/cdapp",
     "autoload": {
         "psr-4": {
-            "Xmick\\Cdapp\\": "public/"
+            "Router\\": "routes/"
         }
     },
     "authors": [

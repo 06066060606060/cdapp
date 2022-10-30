@@ -1,5 +1,9 @@
-<?php
+<?php 
+
+use Router\Router;
+use App\Exceptions\NotFoundException;
+
+
 require '../vendor/autoload.php';
-include '../view/parts/head.php';
-require_once('../view/login.php');
-?>
+
+$router = new Router($_GET['url']);
