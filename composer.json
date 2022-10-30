@@ -1,0 +1,15 @@
+{
+    "name": "xmick/cdapp",
+    "autoload": {
+        "psr-4": {
+            "Xmick\\Cdapp\\": "public/"
+        }
+    },
+    "authors": [
+        {
+            "name": "06066060606060",
+            "email": "xmicky+git@hotmail.fr"
+        }
+    ],
+    "require": {}
+}
