@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use database\DBConnection;
+
 class AppController extends Controller {
 
    public function index()
@@ -11,7 +13,8 @@ class AppController extends Controller {
 
     public function login()
     {
-      echo "login";
+    
+
     }
    
     public function logout()
