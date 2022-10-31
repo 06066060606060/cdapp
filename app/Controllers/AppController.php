@@ -48,11 +48,6 @@ class AppController extends Controller {
       }
 
 
-    public function login()
-    {
-
-    }
-
     public function dashboard()
     {
       $this->isAdmin();
