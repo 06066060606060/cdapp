@@ -11,7 +11,7 @@
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
+                        <a href="/dashboard" class="text-xl font-bold flex items-center lg:ml-2.5">
                         <img src="../img/iconcal.png" class="h-8 w-7 mr-2" alt="Windster Logo">
                             <span class="self-center whitespace-nowrap"></span>
                         </a>
@@ -27,7 +27,7 @@
                 <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
                     <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                         <div class="flex-1 px-3 bg-white divide-y space-y-1">
-                            <ul class="space-y-2 pb-2">
+                            <ul class="space-y-2 pb-2"> 
                                 <li>
                                     <a href="./dashboard" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                                         <i class="text-gray-500 group-hover:text-gray-900 transition duration-75 fa-solid fa-chart-pie"></i>
