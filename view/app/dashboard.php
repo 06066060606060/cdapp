@@ -1,6 +1,6 @@
 <div>
    <?php if(isset($_GET['success'])): ?>
-<div class="alert alert-success">Vous étes connecté !</div>
+<div class="alert alert-success text-lg text-green-400 ml-5">Vous étes connecté !</div>
    <?php endif ?>
 
 <?php include 'parts/navbar.php'; ?>

@@ -36,9 +36,9 @@ class AppController extends Controller {
    
       public function logout()
       {
-        session_start();
+     
         session_destroy();
-        // Redirect to the login page:
+       
         header('Location: /');
       }
 
