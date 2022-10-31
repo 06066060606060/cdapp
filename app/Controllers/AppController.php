@@ -28,6 +28,7 @@ class AppController extends Controller {
       if (password_verify($_POST['password'], $user->password )) {
 
      $_SESSION['auth'] = $user->admin;
+     $_SESSION['id'] = $user->id;
      return header('location: /dashboard?success=true');
 
       } else {
@@ -70,13 +71,28 @@ class AppController extends Controller {
        return $this->view('app.history');
     }
 
-    public function MyApi()
-      {
-         $this->isAdmin();
-
-         $test = (new Userdata($this->getDB()))->getAll();
-         header('Content-Type: application/json');
-         echo json_encode($test, JSON_PRETTY_PRINT);
+  
+   public function getApi(){
+      $this->isAdmin();
+         $con = mysqli_connect("localhost", "root", "", "webapp");
+     $response = array();
+     if($con){
+         $sql = "SELECT * FROM user_data WHERE user_id = {$_SESSION['id']}";
+         $result = mysqli_query($con, $sql);
+         if($result){
+             $x = 0;
+             while($row = mysqli_fetch_assoc($result)){
+                 $response[$x]['id'] = $row['id'];
+                 $response[$x]['h_rate'] = $row['h_rate'];
+                 $response[$x]['work_time'] = $row['work_time'];
+                 $response[$x]['date']= $row['date'];        
+                 $x++;
+             }
+     echo json_encode($response, JSON_PRETTY_PRINT);
+             }
+     }else{
+         echo "Database connection failed";
+     }
       }
-
-}
+   
+   }

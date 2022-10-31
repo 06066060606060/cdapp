@@ -8,11 +8,11 @@ class Userdata extends Model {
 
  protected $table = 'user_data';
 
- public function getAll() : Userdata
- {
- return $this->query("SELECT * FROM {$this->table}", [], true);
+//  public function getAll() : Userdata
+//  {
+//  return $this->query("SELECT * FROM {$this->table}", [], true);
 
- }
+//  }
 
+ 
 }
-
