@@ -41,11 +41,12 @@
     padding: 8px 10px;
     margin: 12px 15px;
     border-radius: 4px;
-    background: #76a1a1;
+    background: #53b47b94;
     color: #222;
     font-size: 14px;
     font-weight: 600;
     font-family: "Avenir", sans-serif;
+    box-shadow: 0px 2px 4px rgba(2,2,2,0.2);
   }
   .row{
     width: 100%;
@@ -72,7 +73,7 @@
   }
   
   .day-add-event{
-    background: #04b6e2;
+    background: #04b6e285;
     color: rgb(114, 51, 51);
     padding: 16px;
     display: none;
@@ -158,6 +159,9 @@
      background: #74c500;
     color: #fff;
     border-color: transparent;
+    border-radius: 10px;
+    padding-right: 75px;
+    margin-right: 20px;
   }
   .event-btn--save:hover{
     box-shadow: 0px 2px 4px rgba(2,2,2,0.2);
@@ -166,6 +170,8 @@
     background: #ff5151;
     color: #fff;
     border-color: transparent;
+    border-radius: 10px;
+   
   }
   .event-btn--cancel:hover{
     box-shadow: 0px 2px 4px rgba(2,2,2,0.2);
@@ -180,13 +186,8 @@
     cursor: pointer;
   }
   #add-event{
-<<<<<<< HEAD
-    color: #04b6e2;
-    border-color: #04b6e2;
-=======
     color: #0026ff;
     border-color: #0026ff;
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
   }
   .day-view-exit{
     position: absolute;
@@ -214,13 +215,10 @@
     border-bottom: 2px solid #222;
     cursor: pointer;
   }
-<<<<<<< HEAD
-=======
 
   .day-view-date:hover{
-    color: #04b6e2;
+    color: #04e285;
   }
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
   .day-inspiration-quote{
     position: absolute;
   /*   top: 90px; */
@@ -262,10 +260,14 @@
     font-weight: 800;
     font-family: 'Avenir', sans-serif;
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: #04b6e2;
 =======
     color: #005b71;
 >>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
+=======
+    color: #11b650;
+>>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
     font-size: 18px;
     text-transform: lowercase;
   /*   position: relative; */
@@ -325,10 +327,14 @@
   }
   .cview__month-last:hover,.cview__month-next:hover{
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: #fff;
 =======
     color: rgb(0, 116, 105);
 >>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
+=======
+    color: rgb(23, 160, 114);
+>>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
   }
   
   .cview__month-current{
@@ -389,8 +395,12 @@
     background: rgba(255,255,255,0.2);
 =======
 
+<<<<<<< HEAD
     background: rgba(0, 115, 125, 0.361);
 >>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
+=======
+    background: rgba(24, 158, 125, 0.361);
+>>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
   }
   .cview--date.today{
     color: #111;  
