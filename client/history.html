@@ -78,7 +78,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./test.html"
+                                    <a href="./index.html"
                                         class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <i
                                             class=" text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 fa-solid fa-arrow-right-from-bracket"></i>
@@ -131,10 +131,10 @@
                                             <tbody class="bg-white">
                                                 <tr>
                                                     <td
-                                                        class="p-4 whitespace-nowrap text-sm font-semibold time-container text-gray-900">
+                                                        class="pl-8 p-4 whitespace-nowrap text-sm font-semibold time-container text-gray-900">
                                                     </td>
                                                     <td
-                                                        class="p-4 whitespace-nowrap text-sm font-normal rate-container text-gray-500">
+                                                        class="pl-8 p-4 whitespace-nowrap text-sm font-normal rate-container text-gray-500">
                                                     </td>
                                                     <td
                                                         class="p-4 whitespace-nowrap text-sm font-normal date-container text-gray-500">
@@ -157,7 +157,7 @@
 
 
     </div>
-
+    <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 </body>
 <script>
     var url = "http://cdapp.test:88/api";
@@ -225,7 +225,7 @@
                     document.getElementsByClassName("gain-container")[0].appendChild(container5);
 
                     document.getElementById("total-container").innerHTML = calculate() + " €";
-                
+
                 }
 
                 function calculate(jsonTxt) {
@@ -235,7 +235,7 @@
                         return acc + item.h_rate / 60 * minutes;
                     }, 0);
                 }
-                   
+
             });
 
     }
