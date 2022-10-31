@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+
 use App\models\User;
 
 use database\DBConnection;
+
 
 class AppController extends Controller {
 
@@ -14,6 +16,7 @@ class AppController extends Controller {
 
       return $this->view('auth.login');
    }
+
 
    public function loginPost() {
       
@@ -41,6 +44,21 @@ class AppController extends Controller {
        
         header('Location: /');
       }
+
+
+    public function login()
+    {
+
+    }
+
+    public function logout()
+    {
+      session_start();
+      session_destroy();
+      // Redirect to the login page:
+      header('Location: /');
+    }
+   
 
 
     public function dashboard()
