@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 
 use App\models\User;
+use App\models\Userdata;
 
 use database\DBConnection;
 
@@ -68,5 +69,14 @@ class AppController extends Controller {
       $this->isAdmin();
        return $this->view('app.history');
     }
+
+    public function MyApi()
+      {
+         $this->isAdmin();
+         $test = (new Userdata($this->getDB()))->getAll();
+   
+         header('Content-Type: application/json');
+         echo json_encode($test, JSON_PRETTY_PRINT);
+      }
 
 }
