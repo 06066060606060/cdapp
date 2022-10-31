@@ -1,0 +1,17 @@
+{
+    "name": "xmick/cdapp",
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/",
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "06066060606060",
+            "email": "xmicky+git@hotmail.fr"
+        }
+    ],
+    "require": {}
+}
