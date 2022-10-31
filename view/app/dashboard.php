@@ -1,4 +1,8 @@
 <div>
+   <?php if(isset($_GET['success'])): ?>
+<div class="alert alert-success">Vous étes connecté !</div>
+   <?php endif ?>
+
 <?php include 'parts/navbar.php'; ?>
       <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
          <main>
