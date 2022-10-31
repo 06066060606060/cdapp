@@ -1,0 +1,13 @@
+{
+
+    "private": true,
+    "scripts": {
+        "start": "serve client/"
+    },
+    "devDependencies": {
+      
+    },
+    "dependencies": {
+       
+    }
+}

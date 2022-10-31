@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <link rel="stylesheet" href="./css/backend.css">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/59ecaaffaa.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<div class="flex flex-row">
+    <h1 class="pl-8">ID:</h1>
+    <div id="flexid" class="flex pt-6 flex-col ">
+
+    </div>
+    <h1 class="pl-8">Taux Horaire:</h1>
+    <div id="flexid0" class="flex pt-6 flex-col ">
+
+    </div>
+    <h1 class="pl-8">DATE:</h1>
+    <div id="flexid1" class="flex pt-6 flex-col ">
+
+    </div>
+    <h1 class="pl-8">Temps de travail:</h1>
+    <div id="flexid2" class="flex pt-6 flex-col ">
+
+    </div>
+    <h1 class="pl-8">Gain total:</h1>
+    <div id="flexid3" class="flex pt-6 flex-col ">
+
+    </div>
+</div>
+</body>
+<script>
+    var url = "http://cdapp.test:88/api";
+
+    window.addEventListener("DOMContentLoaded", (event) => {
+        getdata()
+    });
+
+    function getdata() {
+
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((out) => {
+
+                console.table(out);
+
+                const text = JSON.stringify(out);
+                const obj = JSON.parse(text);
+
+                console.table(obj);
+                let count = 0;
+                for (let i = 0; i < obj.length; i++) {
+                    count = count + 1;
+
+                    flex = document.getElementById("flexid");
+                    h1 = document.createElement("h1");
+                    div = document.createElement("div");
+                    h1.innerHTML = obj[i].id;
+                    div.appendChild(h1);
+                    flex.appendChild(div);
+
+                    flex0 = document.getElementById("flexid0");
+                    block0 = document.createElement("div");
+                    h20 = document.createElement("h1");
+                    h20.innerHTML = obj[i].h_rate + '€';
+                    block0.appendChild(h20);
+                    flex0.appendChild(block0);
+
+                    flex1 = document.getElementById("flexid1");
+                    block = document.createElement("div");
+                    h2 = document.createElement("h1");
+                    h2.innerHTML = obj[i].date;
+                    block.appendChild(h2);
+                    flex1.appendChild(block);
+
+                    flex2 = document.getElementById("flexid2");
+                    block2 = document.createElement("div");
+                    h22 = document.createElement("h1");
+                    h22.innerHTML = obj[i].work_time;
+                    block2.appendChild(h22);
+                    flex2.appendChild(block2);
+
+                    flex3 = document.getElementById("flexid3");
+                    block3 = document.createElement("div");
+                    h23 = document.createElement("h1");
+                    var a =  obj[i].work_time.split(':'); // split it at the colons
+                    var minutes = (+a[0]) * 60 + (+a[1]);
+                    h23.innerHTML = (obj[i].h_rate/60 * minutes) + '€';
+                    block3.appendChild(h23);
+                    flex3.appendChild(block3);
+
+
+                }
+
+            });
+
+
+    }
+</script>
+
+</html>
