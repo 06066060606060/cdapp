@@ -259,15 +259,7 @@
   .event-dates{
     font-weight: 800;
     font-family: 'Avenir', sans-serif;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    color: #04b6e2;
-=======
-    color: #005b71;
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
-=======
     color: #11b650;
->>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
     font-size: 18px;
     text-transform: lowercase;
   /*   position: relative; */
@@ -326,15 +318,7 @@
     color: #222;
   }
   .cview__month-last:hover,.cview__month-next:hover{
-<<<<<<< HEAD
-<<<<<<< HEAD
-    color: #fff;
-=======
-    color: rgb(0, 116, 105);
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
-=======
     color: rgb(23, 160, 114);
->>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
   }
   
   .cview__month-current{
@@ -367,19 +351,12 @@
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
-<<<<<<< HEAD
-=======
     
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
   }
   .has-events::after{
     border-radius:100%;
     animation: popIn 200ms 1 forwards;
-<<<<<<< HEAD
-    background: rgba(255,255,255,0.95);
-=======
     background: rgba(34, 0, 255, 0.95);
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
     transform: scale(0);
     content: '';
     display: block;
@@ -391,16 +368,8 @@
     
   }
   .cview--date:hover::before{
-<<<<<<< HEAD
-    background: rgba(255,255,255,0.2);
-=======
 
-<<<<<<< HEAD
-    background: rgba(0, 115, 125, 0.361);
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
-=======
     background: rgba(24, 158, 125, 0.361);
->>>>>>> 1514d88d98b12d316d73c915b1a7efd2fb046c03
   }
   .cview--date.today{
     color: #111;  
@@ -427,10 +396,7 @@
     transform: scale(0.8);
     z-index: 0;
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
   .footer{
     width: 100%;
     bottom: 50px;
@@ -443,9 +409,4 @@
     cursor: pointer;
     padding: 2px 5px;
     border-bottom: 1px solid #fff;
-<<<<<<< HEAD
   }
-  
-=======
-  }
->>>>>>> 5b7a64dc2c60fdbe9780f1ef1f5f58b3b19823aa
