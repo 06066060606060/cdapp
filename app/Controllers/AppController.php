@@ -73,8 +73,8 @@ class AppController extends Controller {
     public function MyApi()
       {
          $this->isAdmin();
+
          $test = (new Userdata($this->getDB()))->getAll();
-   
          header('Content-Type: application/json');
          echo json_encode($test, JSON_PRETTY_PRINT);
       }
