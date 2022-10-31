@@ -1,20 +1,4 @@
-<?php
-session_start();
-// If the  not logged redirect to index...
-
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: .././index.php');
-    exit;
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<?php include 'parts/head.php'; ?>
-</head>
-<body>
-
-   <?php include 'parts/navbar.php'; ?>
+ <?php include 'parts/navbar.php'; ?>
             <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                 <main>
                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
@@ -74,7 +58,3 @@ if (!isset($_SESSION['loggedin'])) {
 
 
     </div>
-
-</body>
-
-</html>

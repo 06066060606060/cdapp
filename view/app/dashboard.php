@@ -1,24 +1,3 @@
-<?php
-
-setlocale(LC_TIME, 'fr_FR');
-date_default_timezone_set('Europe/Paris');
-session_start();
-// If the  not logged redirect to index...
-
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: .././index.php');
-	exit;
-}
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-<?php include 'parts/head.php'; ?>
-</head>
-
-<body>
-
 <div>
 <?php include 'parts/navbar.php'; ?>
       <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
@@ -59,7 +38,3 @@ if (!isset($_SESSION['loggedin'])) {
  
    <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 </div>
-
-</body>
-
-</html>
