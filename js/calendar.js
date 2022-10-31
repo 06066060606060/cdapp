@@ -43,7 +43,7 @@ function CalendarApp(date) {
     this.dayViewExitEle = document.getElementById("day-view-exit");
     this.dayViewDateEle = document.getElementById("day-view-date");
     this.addDayEventEle = document.getElementById("add-event");
-    this.dayEventsEle = document.getElementById("day-events");
+    // this.dayEventsEle = document.getElementById("day-events");
     
     this.dayEventAddForm = {
       cancelBtn: document.getElementById("add-event-cancel"),
