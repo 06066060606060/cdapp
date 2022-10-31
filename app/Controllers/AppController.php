@@ -74,6 +74,7 @@ class AppController extends Controller {
              $x = 0;
              while($row = mysqli_fetch_assoc($result)){
                  $response[$x]['id'] = $row['id'];
+                 $response[$x]['user_id'] = $row['user_id'];
                  $response[$x]['h_rate'] = $row['h_rate'];
                  $response[$x]['work_time'] = $row['work_time'];
                  $response[$x]['date']= $row['date'];        

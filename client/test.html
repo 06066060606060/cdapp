@@ -11,28 +11,25 @@
 </head>
 
 <body>
-<div class="flex flex-row">
-    <h1 class="pl-8">ID:</h1>
-    <div id="flexid" class="flex pt-6 flex-col ">
-
+    <div class="flex flex-row">
+        <h1 class="pl-1">user id:</h1>
+        <h1 class="pl-2">Taux Horaire:</h1>
+        <h1 class="pl-8">DATE:</h1>
+        <h1 class="pl-8">Temps de travail:</h1>
+        <h1 class="pl-4">Gain total:</h1>
     </div>
-    <h1 class="pl-8">Taux Horaire:</h1>
-    <div id="flexid0" class="flex pt-6 flex-col ">
-
+    <div class="flex flex-row">
+        <div class="flex flex-col id-container pl-8 ">
+        </div>
+        <div class="flex flex-col rate-container pl-10">
+        </div>
+        <div class="flex flex-col date-container pl-10">
+        </div>
+        <div class="flex flex-col time-container pl-10">
+        </div>
+        <div class="flex flex-col gain-container pl-10">
+        </div>
     </div>
-    <h1 class="pl-8">DATE:</h1>
-    <div id="flexid1" class="flex pt-6 flex-col ">
-
-    </div>
-    <h1 class="pl-8">Temps de travail:</h1>
-    <div id="flexid2" class="flex pt-6 flex-col ">
-
-    </div>
-    <h1 class="pl-8">Gain total:</h1>
-    <div id="flexid3" class="flex pt-6 flex-col ">
-
-    </div>
-</div>
 </body>
 <script>
     var url = "http://cdapp.test:88/api";
@@ -42,7 +39,6 @@
     });
 
     function getdata() {
-
 
         fetch(url)
             .then((res) => res.json())
@@ -54,52 +50,64 @@
                 const obj = JSON.parse(text);
 
                 console.table(obj);
-                let count = 0;
-                for (let i = 0; i < obj.length; i++) {
-                    count = count + 1;
 
-                    flex = document.getElementById("flexid");
-                    h1 = document.createElement("h1");
-                    div = document.createElement("div");
-                    h1.innerHTML = obj[i].id;
-                    div.appendChild(h1);
-                    flex.appendChild(div);
+                let textFromJSON = obj;
+                textFromJSON.forEach(appendNewThing)
 
-                    flex0 = document.getElementById("flexid0");
-                    block0 = document.createElement("div");
-                    h20 = document.createElement("h1");
-                    h20.innerHTML = obj[i].h_rate + '€';
-                    block0.appendChild(h20);
-                    flex0.appendChild(block0);
+                function appendNewThing(jsonTxt) {
+                    //user_ID
+                    let container = document.createElement("div");
+                    container.className = "child-holder";
+                    let newP = document.createElement("p");
+                    newP.className = "child";
+                    let newContent = document.createTextNode(jsonTxt.user_id);
+                    newP.appendChild(newContent);
+                    container.appendChild(newP);
+                    document.getElementsByClassName("id-container")[0].appendChild(container);
 
-                    flex1 = document.getElementById("flexid1");
-                    block = document.createElement("div");
-                    h2 = document.createElement("h1");
-                    h2.innerHTML = obj[i].date;
-                    block.appendChild(h2);
-                    flex1.appendChild(block);
+                    //Taux Horaire
+                    let container2 = document.createElement("div");
+                    container2.className = "child-holder2";
+                    let newP2 = document.createElement("p");
+                    newP2.className = "child2";
+                    let newContent2 = document.createTextNode(jsonTxt.h_rate + " €");
+                    newP2.appendChild(newContent2);
+                    container2.appendChild(newP2);
+                    document.getElementsByClassName("rate-container")[0].appendChild(container2);
 
-                    flex2 = document.getElementById("flexid2");
-                    block2 = document.createElement("div");
-                    h22 = document.createElement("h1");
-                    h22.innerHTML = obj[i].work_time;
-                    block2.appendChild(h22);
-                    flex2.appendChild(block2);
-
-                    flex3 = document.getElementById("flexid3");
-                    block3 = document.createElement("div");
-                    h23 = document.createElement("h1");
-                    var a =  obj[i].work_time.split(':'); // split it at the colons
+                    //date
+                    let container3 = document.createElement("div");
+                    container3.className = "child-holder3";
+                    let newP3 = document.createElement("p");
+                    newP3.className = "child3";
+                    datefr = jsonTxt.date.split('-').reverse().join('-')
+                    let newContent3 = document.createTextNode(datefr);
+                    newP3.appendChild(newContent3);
+                    container3.appendChild(newP3);
+                    document.getElementsByClassName("date-container")[0].appendChild(container3);
+                    // Temps de travail
+                    let container4 = document.createElement("div");
+                    container4.className = "child-holder4";
+                    let newP4 = document.createElement("p");
+                    newP4.className = "child4";
+                    let newContent4 = document.createTextNode(jsonTxt.work_time + " h");
+                    newP4.appendChild(newContent4);
+                    container4.appendChild(newP4);
+                    document.getElementsByClassName("time-container")[0].appendChild(container4);
+                    //gain total
+                    let container5 = document.createElement("div");
+                    container5.className = "child-holder5";
+                    let newP5 = document.createElement("p");
+                    newP5.className = "child5";
+                    var a = jsonTxt.work_time.split(':'); // split it at the colons
                     var minutes = (+a[0]) * 60 + (+a[1]);
-                    h23.innerHTML = (obj[i].h_rate/60 * minutes) + '€';
-                    block3.appendChild(h23);
-                    flex3.appendChild(block3);
-
+                    let newContent5 = document.createTextNode(jsonTxt.h_rate / 60 * minutes + " €");
+                    newP5.appendChild(newContent5);
+                    container5.appendChild(newP5);
+                    document.getElementsByClassName("gain-container")[0].appendChild(container5);
 
                 }
-
             });
-
 
     }
 </script>
