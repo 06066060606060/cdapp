@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use database\DBConnection;
 
 class AppController extends Controller {
 
@@ -13,15 +12,17 @@ class AppController extends Controller {
 
     public function login()
     {
-    
 
     }
-   
+
     public function logout()
     {
-      echo "logout";
+      session_start();
+      session_destroy();
+      // Redirect to the login page:
+      header('Location: /');
     }
-
+   
 
     public function dashboard()
     {
