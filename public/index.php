@@ -17,7 +17,6 @@ $router->get('/', 'App\Controllers\AppController@index');
 $router->post('/login', 'App\Controllers\AppController@loginPost');
 $router->get('/logout', 'App\Controllers\AppController@logout');
 
-=======
 $router->post('/login', 'App\Controllers\AppController@login');
 $router->get('/logout', 'App\Controllers\AppController@logout');
 
