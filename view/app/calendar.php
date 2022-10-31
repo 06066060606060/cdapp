@@ -16,22 +16,22 @@
                         <div class="half">
                            <label class="add-event-label">
                               Nom
-                              <input type="text" class="add-event-edit add-event-edit--long" placeholder="New event" id="input-add-event-name">
+                              <input type="text" class="add-event-edit add-event-edit--long" placeholder="Évènement" id="input-add-event-name">
 
                            </label>
                         </div>
                         <div class="qtr">
                            <label class="add-event-label">
-                              Début
+                               Heure de début
                               <input type="text" class="add-event-edit" placeholder="8:15" id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                              <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-start-ampm" data-options="a,p,am,pm">
+                             
                            </label>
                         </div>
                         <div class="qtr">
                            <label class="add-event-label">
-                              Fin
+                              Heure de fin
                               <input type="text" class="add-event-edit" placeholder="9:00" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                              <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">
+                           
                            </label>
                         </div>
                         <div class="half">

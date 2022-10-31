@@ -10,7 +10,7 @@
             <h1 class="text-gray-900 text-2xl">Easy Follow</h1>
 
 
-            <input class="w-full p-2 bg-gray-50 border border-gray-300 rounded-md   focus:border-blue-700" type="text" name="username" placeholder="E-Mail" id="username" required>
+            <input class="w-full p-2 bg-gray-50 border border-gray-300 rounded-md   focus:border-blue-700" type="text" name="email" placeholder="E-Mail" id="email" required>
 
             <input class="w-full p-2 bg-gray-50 border border-gray-300 rounded-md" type="password" name="password" placeholder="Password" id="password" required>
 
