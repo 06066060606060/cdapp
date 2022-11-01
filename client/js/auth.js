@@ -16,7 +16,7 @@ class Auth {
    // will remove the localStorage item and redirect to login  screen
    logOut() {
        localStorage.removeItem("auth");
-       window.location.replace("/client/");
+       window.location.replace("/");
    }
 }
 

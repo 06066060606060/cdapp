@@ -1,14 +1,40 @@
+let url = "http://cdapp.test:88/api";
+//let token = localStorage.getItem("token");  //pour plus tard...
+  newDates = [];
+
+function grabJson() {
+  fetch(url)
+    .then((res) => res.json())
+    .then((out) => {
+      const text = JSON.stringify(out);
+      const obj = JSON.parse(text);
+      // console.table(obj);
+      let textFromJSON = obj;
+      textFromJSON.forEach((item) => {  //boucle le json
+        newDates.push(new Date(item.date).toString()); //push les dates dans un tableau
+      });
+    })
+}
 
 function CalendarApp(date) {
+  grabJson();
+  
+
+  console.log(newDates);
+  
+  // this.aptDates = [new Date(2022, 11, 01).toString(), new Date(2022, 11, 09).toString()]; // original
+  this.aptDates = newDates; //test json!!!.... :@
+
+
+
 
   if (!(date instanceof Date)) {
     date = new Date();
   }
-
   this.days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Juin', 'Jull', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'];
   this.apts = [];
-  this.aptDates = [new Date(2022, 10, 30).toString()];
+
   this.eles = {
   };
   this.calDaySelected = null;
@@ -49,6 +75,7 @@ function CalendarApp(date) {
   this.todayIsSpan.textContent = "Nous somme le " + date.getDate() + " " + this.months[date.getMonth()];
 }
 
+
 CalendarApp.prototype.addEventListeners = function () {
 
   this.calendar.addEventListener("click", this.mainCalendarClickClose.bind(this));
@@ -67,7 +94,10 @@ CalendarApp.prototype.addEventListeners = function () {
   this.dayEventAddForm.endAMPM.addEventListener("keyup", this.inputChangeLimiter.bind(this));
   this.dayEventAddForm.addBtn.addEventListener("click", this.saveAddNewEvent.bind(this));
 
+
 };
+
+
 CalendarApp.prototype.showView = function (date) {
   if (!date || (!(date instanceof Date))) date = new Date();
   var now = new Date(date),
@@ -132,6 +162,8 @@ CalendarApp.prototype.showView = function (date) {
   this.calendarMonthNextDiv.setAttribute("data-date", nextM);
 
 }
+
+
 CalendarApp.prototype.showDay = function (e, dayEle) {
   e.stopPropagation();
   if (!dayEle) {
@@ -146,6 +178,8 @@ CalendarApp.prototype.showDay = function (e, dayEle) {
 
 
 };
+
+
 CalendarApp.prototype.openDayWindow = function (date) {
 
   var now = new Date();
@@ -220,6 +254,8 @@ CalendarApp.prototype.showEventsCreateElesView = function (events) {
   });
   return ul;
 };
+
+
 CalendarApp.prototype.deleteEvent = function (e) {
   var deleted = this.apts.splice(e.currentTarget.getAttribute("data-idx"), 1);
   var deletedDate = new Date(deleted[0].day);
@@ -238,6 +274,8 @@ CalendarApp.prototype.deleteEvent = function (e) {
   }
   this.openDayWindow(deletedDate);;
 };
+
+
 CalendarApp.prototype.sortEventsByTime = function (events) {
   if (!events) return [];
   return events.sort(function compare(a, b) {
@@ -251,6 +289,8 @@ CalendarApp.prototype.sortEventsByTime = function (events) {
     return 0;
   });
 };
+
+
 CalendarApp.prototype.showEventsByDay = function (day) {
   var _events = [];
   this.apts.forEach(function (apt, idx) {
@@ -261,10 +301,14 @@ CalendarApp.prototype.showEventsByDay = function (day) {
   });
   return (_events.length) ? _events : false;
 };
+
+
 CalendarApp.prototype.closeDayWindow = function () {
   this.dayViewEle.classList.remove("calendar--day-view-active");
   this.closeNewEventBox();
 };
+
+
 CalendarApp.prototype.mainCalendarClickClose = function (e) {
   if (e.currentTarget != e.target) {
     return;
@@ -273,12 +317,16 @@ CalendarApp.prototype.mainCalendarClickClose = function (e) {
   this.dayViewEle.classList.remove("calendar--day-view-active");
   this.closeNewEventBox();
 };
+
+
 CalendarApp.prototype.addNewEventBox = function (e) {
   var target = e.currentTarget;
   this.dayEventBoxEle.setAttribute("data-active", "true");
   this.dayEventBoxEle.setAttribute("data-date", target.getAttribute("data-date"));
 
 };
+
+
 CalendarApp.prototype.closeNewEventBox = function (e) {
 
   if (e && e.keyCode && e.keyCode != 13) return false;
@@ -288,6 +336,7 @@ CalendarApp.prototype.closeNewEventBox = function (e) {
   this.resetAddEventBox();
 
 };
+
 CalendarApp.prototype.saveAddNewEvent = function () {
   var saveErrors = this.validateAddEventInput();
   if (!saveErrors) {
@@ -317,6 +366,8 @@ CalendarApp.prototype.addEvent = function () {
   }
 
 };
+
+
 CalendarApp.prototype.convertTo23HourTime = function (stringOfTime, AMPM) {
   // convert to 0 - 23 hour time
   var mins = stringOfTime.split(":");
@@ -331,6 +382,8 @@ CalendarApp.prototype.convertTo23HourTime = function (stringOfTime, AMPM) {
   hours = (AMPM == 'am') ? ((hours == 12) ? 0 : hours) : (hours <= 11) ? parseInt(hours) + 12 : hours;
   return [hours, mins];
 };
+
+
 CalendarApp.prototype.cleanEventTimeStampDates = function () {
 
   var startTime = this.dayEventAddForm.startTime.value.trim() || this.dayEventAddForm.startTime.getAttribute("placeholder") || '8';
@@ -354,6 +407,8 @@ CalendarApp.prototype.cleanEventTimeStampDates = function () {
   return [startDate, endDate];
 
 };
+
+
 CalendarApp.prototype.validateAddEventInput = function () {
 
   var _errors = false;
@@ -384,6 +439,8 @@ CalendarApp.prototype.validateAddEventInput = function () {
 };
 var timeOut = null;
 var activeEle = null;
+
+
 CalendarApp.prototype.inputChangeLimiter = function (ele) {
 
   if (ele.currentTarget) {
@@ -403,6 +460,8 @@ CalendarApp.prototype.inputChangeLimiter = function (ele) {
   activeEle = ele;
 
 };
+
+
 CalendarApp.prototype.textOptionLimiter = function (options, input, format) {
   if (!input) return '';
 
@@ -458,6 +517,8 @@ CalendarApp.prototype.textOptionLimiter = function (options, input, format) {
 
   return input;
 };
+
+
 CalendarApp.prototype.resetAddEventBox = function () {
   this.dayEventAddForm.nameEvent.value = '';
   this.dayEventAddForm.nameEvent.classList.remove("add-event-edit--error");
@@ -466,6 +527,8 @@ CalendarApp.prototype.resetAddEventBox = function () {
   this.dayEventAddForm.endAMPM.value = '';
   this.dayEventAddForm.startAMPM.value = '';
 };
+
+
 CalendarApp.prototype.showNewMonth = function (e) {
   var date = e.currentTarget.dataset.date;
   var newMonthDate = new Date(date);
