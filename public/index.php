@@ -13,6 +13,8 @@ define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 $router = new Router($_GET['url']);
 
 $router->get('/api', 'App\Controllers\AppController@getApi');
+$router->get('/apidate', 'App\Controllers\AppController@getApiToDay');
+
 
 $router->post('/login', 'App\Controllers\AppController@loginPost');
 $router->get('/logout', 'App\Controllers\AppController@logout');

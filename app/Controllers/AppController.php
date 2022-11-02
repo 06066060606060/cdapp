@@ -67,8 +67,35 @@ class AppController extends Controller {
          $con = mysqli_connect("localhost", "root", "", "webapp");
      $response = array();
      if($con){
-         $sql = "SELECT * FROM user_data";
+         $sql = "SELECT * FROM user_data ORDER BY date DESC ";
          //  WHERE user_id = {$_SESSION['id']}";
+         $result = mysqli_query($con, $sql);
+         if($result){
+             $x = 0;
+             while($row = mysqli_fetch_assoc($result)){
+                 $response[$x]['id'] = $row['id'];
+                 $response[$x]['user_id'] = $row['user_id'];
+                 $response[$x]['h_rate'] = $row['h_rate'];
+                 $response[$x]['work_time'] = $row['work_time'];
+                 $response[$x]['date']= $row['date'];        
+                 $x++;
+             }
+     echo json_encode($response, JSON_PRETTY_PRINT);
+             }
+     }else{
+         echo "Database connection failed";
+     }
+      }
+
+      public function getApiToDay(){
+
+         $con = mysqli_connect("localhost", "root", "", "webapp");
+     $response = array();
+     $today = date("Y-m-d");
+
+     if($con){
+         $sql = "SELECT * FROM user_data WHERE user_data.date = '$today'" ;
+         // WHERE user_id = {$_SESSION['id']}";
          $result = mysqli_query($con, $sql);
          if($result){
              $x = 0;
