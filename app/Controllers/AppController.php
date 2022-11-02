@@ -11,12 +11,7 @@ use database\DBConnection;
 
 class AppController extends Controller {
 
-   public function index()
-   { 
-     
 
-      return $this->view('auth.login');
-   }
 
 
    public function loginPost() {
@@ -68,16 +63,18 @@ class AppController extends Controller {
 
   
    public function getApi(){
-      $this->isAdmin();
+
          $con = mysqli_connect("localhost", "root", "", "webapp");
      $response = array();
      if($con){
-         $sql = "SELECT * FROM user_data WHERE user_id = {$_SESSION['id']}";
+         $sql = "SELECT * FROM user_data";
+         //  WHERE user_id = {$_SESSION['id']}";
          $result = mysqli_query($con, $sql);
          if($result){
              $x = 0;
              while($row = mysqli_fetch_assoc($result)){
                  $response[$x]['id'] = $row['id'];
+                 $response[$x]['user_id'] = $row['user_id'];
                  $response[$x]['h_rate'] = $row['h_rate'];
                  $response[$x]['work_time'] = $row['work_time'];
                  $response[$x]['date']= $row['date'];        
