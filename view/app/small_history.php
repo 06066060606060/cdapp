@@ -5,7 +5,7 @@
             <span class="text-base font-normal text-gray-500">La liste des derniers historiques</span>
         </div>
         <div class="flex-shrink-0">
-            <a href="./history.php" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Tout voir</a>
+            <a href="./history" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Tout voir</a>
         </div>
     </div>
     <div class="flex flex-col mt-8">
