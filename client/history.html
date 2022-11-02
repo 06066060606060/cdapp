@@ -174,12 +174,12 @@
             .then((res) => res.json())
             .then((out) => {
 
-                console.table(out);
+               
 
                 const text = JSON.stringify(out);
                 const obj = JSON.parse(text);
 
-                console.table(obj);
+              
 
                 let textFromJSON = obj;
                 textFromJSON.forEach(appendNewThing)
