@@ -225,9 +225,10 @@
 <script>
 
     function runget(opt) {
+           //API DAY------------------------------------------------------------------------
         if (opt == "day") {
             var url = "http://cdapp.test:88/api/today";
-            getToDayData();
+  
             charts(url);
             function charts(url) {
 
@@ -277,17 +278,32 @@
                             x: new Date(data[i].date),
                             y: items
                         });
+
+                       
+                        document.getElementById("total-container").innerHTML = items + " €";
                     }
                     chart.render();
+                    
                 }
 
 
                 $.getJSON(url, addData);
             }
+           
+        
+
+            function calculate(url) {
+                    return textFromJSON.reduce((acc, item) => {
+                        let a = item.work_time.split(':'); // copilot merci!!!!
+                        let minutes = (+a[0]) * 60 + (+a[1]);
+                        return acc + item.h_rate / 60 * minutes;
+                    }, 0);
+                }
         }
+           //API WEEK------------------------------------------------------------------------
         else if (opt == "week") {
             var url = "http://cdapp.test:88/api/week";
-            getdataWeek();
+        
             charts(url);
             function charts(url) {
 
@@ -341,12 +357,14 @@
                         });
                     }
                     chart.render();
+                    document.getElementById("total-container").innerHTML = items + " €";
                 }
 
 
                 $.getJSON(url, addData);
             }
         }
+        //API MONTH------------------------------------------------------------------------
         else if (opt == "month") {
             var url = "http://cdapp.test:88/api";
             charts(url)
@@ -383,18 +401,21 @@
 
 
                 function addData(data) {
+                    let compte = {};
 
                     for (var i = 0; i < data.length; i++) {
                         let work = data[i].work_time.split(':') //temps en secondes
                         var minutes = (+work[0]) * 60 + (+work[1]);
                         let items = parseInt(data[i].h_rate / 60 * minutes)
-
+                        
                         dataPoints.push({
                             x: new Date(data[i].date),
                             y: items
                         });
                     }
                     chart.render();
+                 
+                    document.getElementById("total-container").innerHTML = items + " €";
                 }
 
 
@@ -404,6 +425,8 @@
 
 
     };
+
+    // API ALL DATA
 
     var url = "http://cdapp.test:88/api";
     function charts(url) {
@@ -538,87 +561,15 @@
             });
 
     }
-
-    var url2 = "http://cdapp.test:88/api/today";
-    function getToDayData() {
-        console.log("getToDayData")
-        fetch(url2)
-            .then((res) => res.json())
-            .then((out) => {
-                const text = JSON.stringify(out);
-                const obj = JSON.parse(text);
-                let textFromJSON = obj;
-                textFromJSON.forEach(appendNewThing)
-
-                function appendNewThing(jsonTxt) {
-                    //Temps de travail 
-                    // console.log(jsonTxt)
-                    document.getElementById("total-container2").innerHTML = calculate2() + " €";
-                }
-
-                function calculate2(jsonTxt) {
-                    return textFromJSON.reduce((acc, item) => {
-                        let a = item.work_time.split(':'); // copilot merci!!!!
-                        let minutes = (+a[0]) * 60 + (+a[1]);
-                        return acc + item.h_rate / 60 * minutes;
-                    }, 0);
-                }
-            });
-    }
-
-    var url3 = "http://cdapp.test:88/api/week";
-    function getdataWeek() {
-        fetch(url2)
-            .then((res) => res.json())
-            .then((out) => {
-                const text = JSON.stringify(out);
-                const obj = JSON.parse(text);
-                let textFromJSON = obj;
-                textFromJSON.forEach(appendNewThing)
-
-                function appendNewThing(jsonTxt) {
-                    //Temps de travail 
-                    // console.log(jsonTxt)
-                    document.getElementById("total-container2").innerHTML = calculate2() + " €";
-                }
-                function calculate2(jsonTxt) {
-                    return textFromJSON.reduce((acc, item) => {
-                        let a = item.work_time.split(':'); // copilot merci!!!!
-                        let minutes = (+a[0]) * 60 + (+a[1]);
-                        return acc + item.h_rate / 60 * minutes;
-                    }, 0);
-                }
-            });
-    }
-
-    var url4 = "http://cdapp.test:88/api/month";
-    function getToDayMonth() {
-        console.log("getToMonthData")
-        fetch(url2)
-            .then((res) => res.json())
-            .then((out) => {
-                const text = JSON.stringify(out);
-                const obj = JSON.parse(text);
-                let textFromJSON = obj;
-                textFromJSON.forEach(appendNewThing)
-
-                function appendNewThing(jsonTxt) {
-                    //Temps de travail 
-                    // console.log(jsonTxt)
-                    document.getElementById("total-container2").innerHTML = calculate2() + " €";
-                }
-
-                function calculate2(jsonTxt) {
-                    return textFromJSON.reduce((acc, item) => {
-                        let a = item.work_time.split(':'); // copilot merci!!!!
-                        let minutes = (+a[0]) * 60 + (+a[1]);
-                        return acc + item.h_rate / 60 * minutes;
-                    }, 0);
-                }
-            });
-    }
-
-
+  
 </script>
+<style>
+    .canvasjs-chart-credit {
+        display: none;
+    }
 
+    .chartContainer > img {
+        display: none;
+    }
+</style>
 </html>
