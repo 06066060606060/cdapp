@@ -113,5 +113,25 @@ class AppController extends Controller {
          echo "Database connection failed";
      }
       }
+      public function addTask(){
+       $conn = mysqli_connect("localhost", "root", "", "webapp");
+      
+       $name=$_POST['duree'];
+       $email=$_POST['email'];
+       $phone=$_POST['phone'];
+      
+       $sql = "INSERT INTO `user_data`( `work_time`, `h_rate`, `date`) 
+       VALUES ('$name','$email','$phone')";
+       if (mysqli_query($conn, $sql)) {
+           echo json_encode(array("statusCode"=>200));
+       } 
+       else {
+           echo json_encode(array("statusCode"=>201));
+       }
+       mysqli_close($conn);
    
-   }
+
+return $this->view('add');
+}
+
+}

@@ -29,7 +29,7 @@ abstract class Controller
       $params =  extract($params);
     }
     $content = ob_get_clean();
-     require VIEW . 'layout.php';
+     require VIEW . 'add.php';
   }
 
   protected function getDB()

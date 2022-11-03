@@ -20,3 +20,5 @@ $router->post('/login', 'App\Controllers\AppController@loginPost');
 $router->get('/logout', 'App\Controllers\AppController@logout');
 
  $router->run('GET', '/');
+
+ $router->post('/addTask', 'App\Controllers\AppController@addTask');
