@@ -25,7 +25,7 @@ function grabJson() {
   }
 
 
-function CalendarApp(date, newdate) {
+function CalendarApp(date) {
   //this.aptDates = ['Sat Nov 12 2022 04:00:00 GMT+0400 (heure normale de Maurice)'];
   
   this.aptDates = grabJson();
@@ -93,17 +93,6 @@ CalendarApp.prototype.addEventListeners = function () {
   this.calendarMonthNextDiv.addEventListener("click", this.showNewMonth.bind(this));
   this.dayViewExitEle.addEventListener("click", this.closeDayWindow.bind(this));
   this.dayViewDateEle.addEventListener("click", this.showNewMonth.bind(this));
-  this.addDayEventEle.addEventListener("click", this.addNewEventBox.bind(this));
-  this.dayEventAddForm.cancelBtn.addEventListener("click", this.closeNewEventBox.bind(this));
-  this.dayEventAddForm.cancelBtn.addEventListener("keyup", this.closeNewEventBox.bind(this));
-
-  this.dayEventAddForm.startTime.addEventListener("keyup", this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.startAMPM.addEventListener("keyup", this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.endTime.addEventListener("keyup", this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.endAMPM.addEventListener("keyup", this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.addBtn.addEventListener("click", this.saveAddNewEvent.bind(this));
-
-
 };
 
 
@@ -191,7 +180,7 @@ CalendarApp.prototype.showDay = function (e, dayEle) {
 
 
 CalendarApp.prototype.openDayWindow = function (date) {
-
+  console.log("openDayWindow");
   var now = new Date();
   var day = new Date(date);
   this.dayViewDateEle.textContent = this.days[day.getDay()] + " " + day.getDate() + " " + this.months[day.getMonth()] + " " + day.getFullYear();
@@ -202,30 +191,14 @@ CalendarApp.prototype.openDayWindow = function (date) {
   var _dayTopbarText = '';
 
   _dayTopbarText = "vous avez ";
-  this.addDayEventEle.style.display = "inline";
-
-  this.addDayEventEle.setAttribute("data-date", day);
 
   var eventsToday = this.showEventsByDay(day);
   if (!eventsToday) {
-    _dayTopbarText += "no ";
-    var _rand = Math.round(Math.random() * ((this.quotes.length - 1) - 0) + 0);
-    this.dayInspirationalQuote.textContent = this.quotes[_rand];
+  
   } else {
-    _dayTopbarText += eventsToday.length + " ";
-    this.dayInspirationalQuote.textContent = null;
+    
   }
   //this.dayEventsList.innerHTML = this.showEventsCreateHTMLView(eventsToday);
-  while (this.dayEventsList.firstChild) {
-    this.dayEventsList.removeChild(this.dayEventsList.firstChild);
-  }
-
-  this.dayEventsList.appendChild(this.showEventsCreateElesView(eventsToday));
-
-
-  this.dayEventsEle.textContent = _dayTopbarText + "evenement le " + day.getDate() + " " + this.months[day.getMonth()] + " " + day.getFullYear();
-
-
 };
 
 CalendarApp.prototype.showEventsCreateElesView = function (events) {
@@ -343,7 +316,7 @@ CalendarApp.prototype.closeNewEventBox = function (e) {
 
   if (e && e.keyCode && e.keyCode != 13) return false;
 
-  this.dayEventBoxEle.setAttribute("data-active", "false");
+ 
   // reset values
   this.resetAddEventBox();
 
@@ -532,12 +505,7 @@ CalendarApp.prototype.textOptionLimiter = function (options, input, format) {
 
 
 CalendarApp.prototype.resetAddEventBox = function () {
-  this.dayEventAddForm.nameEvent.value = '';
-  this.dayEventAddForm.nameEvent.classList.remove("add-event-edit--error");
-  this.dayEventAddForm.endTime.value = '';
-  this.dayEventAddForm.startTime.value = '';
-  this.dayEventAddForm.endAMPM.value = '';
-  this.dayEventAddForm.startAMPM.value = '';
+//fermeturepopup
 };
 
 

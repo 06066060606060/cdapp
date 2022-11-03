@@ -41,7 +41,7 @@
                                 <img src="./img/iconcal.png" class="h-8 w-7 mr-2" alt="Windster Logo">
                                 <span class="self-center whitespace-nowrap"></span>
                             </a>
-
+                            <span class="pl-2 font-bold text-xl">Easy Follow</span>
                         </div>
                         <div class="flex items-center">
                             <button id="toggleSidebarMobileSearch" type="non"
@@ -101,57 +101,29 @@
                             <span class="day-view-exit" id="day-view-exit">&times;</span>
                             <span class="day-view-date" id="day-view-date"></span>
                             <div class="day-view-content">
-                                <div class="day-highlight">
-                                    <span class="day-events" id="day-events">Vous n'avez pas travailler ce jour</span>
-                                    <span tabindex="0" onkeyup="if(event.keyCode != 13) return; this.click();"
-                                        class="day-events-link" id="add-event" data-date>Ajouter un nouvel
-                                        évenement?</span>
-                                </div>
-                                <div class="day-add-event" id="add-day-event-box" data-active="false">
-                                    <div class="row">
-                                        <div class="half">
-                                            <label class="add-event-label">
-                                                Nom
-                                                <input type="text" class="add-event-edit add-event-edit--long"
-                                                    placeholder="New event" id="input-add-event-name">
-
-                                            </label>
+                                <div class="flex flex-row justify-center pt-10">
+                                    <form id="fupForm" name="form1" method="post">
+                                        <div class="form-group">
+                                            <label for="email">taux:</label>
+                                            <input type="number" class="form-control" id="taux" placeholder=""
+                                                name="taux" value="55">
                                         </div>
-                                        <div class="qtr">
-                                            <label class="add-event-label">
-                                                Début
-                                                <input type="text" class="add-event-edit" placeholder="8:15"
-                                                    id="input-add-event-start-time"
-                                                    data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                                                <input type="text" class="add-event-edit" placeholder="am"
-                                                    id="input-add-event-start-ampm" data-options="a,p,am,pm">
-                                            </label>
+                                        <div class="form-group">
+                                            <label for="pwd">date:</label>
+                                            <input type="text" class="form-control" id="date" placeholder="" name="date"
+                                                value="10/10/2022">
                                         </div>
-                                        <div class="qtr">
-                                            <label class="add-event-label">
-                                                Fin
-                                                <input type="text" class="add-event-edit" placeholder="9:00"
-                                                    id="input-add-event-end-time"
-                                                    data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                                                <input type="text" class="add-event-edit" placeholder="am"
-                                                    id="input-add-event-end-ampm" data-options="a,p,am,pm">
-                                            </label>
+                                        <div class="form-group">
+                                            <label for="pwd">duree:</label>
+                                            <input type="text" class="form-control" id="duree" placeholder=""
+                                                name="duree" value="5">
                                         </div>
-                                        <div class="half">
-                                            <a onkeyup="if(event.keyCode != 13) return; this.click();" tabindex="0"
-                                                id="add-event-save" class="event-btn--save event-btn">Sauvegarder</a>
-                                            <a tabindex="0" id="add-event-cancel"
-                                                class="event-btn--cancel event-btn">Annuler</a>
-                                        </div>
-                                    </div>
 
+                                        <button name="save" class="btn btn-primary p-2 border" value="Save to database"
+                                            id="butsave">save</button>
+                                    </form>
                                 </div>
-                                <div id="day-events-list" class="day-events-list">
-
-                                </div>
-                                <div class="day-inspiration-quote" id="inspirational-quote">
-
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="calendar--view" id="calendar-view">
@@ -179,8 +151,37 @@
                     <script src="./js/calendar.js"></script>
                 </div>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script>
-               
+                $(document).ready(function () {
+                    $('#butsave').on('click', function () {
+                        var duree = $('#duree').val();
+                        var date = $('#date').val();
+                        var taux = $('#taux').val();
+
+                        if (duree != "" && date != "" && taux != "") {
+                            $.ajax({
+                                url: 'http://cdapp.test:88/addTask',
+                                method: 'POST',
+                                type: 'json',
+                                data: {
+                                    duree,
+                                    date,
+                                    taux,
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+                        else {
+                            alert('Please fill all the field !');
+                        }
+                    });
+                });
             </script>
 
             <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-
+use App\Models\Model;
 use App\models\User;
 use App\models\Userdata;
 
@@ -12,10 +12,16 @@ use database\DBConnection;
 class AppController extends Controller
 {
 
+
+
+    public function connect()
+    {
+        return mysqli_connect("localhost", "root", "", "webapp");
+    }
+
+
     public function loginPost()
     {
-
-        $this->isAdmin();
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['auth'] = $user->admin;
@@ -26,7 +32,6 @@ class AppController extends Controller
         }
     }
 
-
     public function logout()
     {
         session_destroy();
@@ -34,10 +39,9 @@ class AppController extends Controller
     }
 
     //full api
-
     public function getApi()
     {
-        $con = mysqli_connect("localhost", "root", "", "webapp");
+        $con = $this->connect();
         $response = array();
         if ($con) {
             $sql = "SELECT * FROM user_data WHERE user_data.user_id = '1' ORDER BY date DESC";
@@ -63,8 +67,7 @@ class AppController extends Controller
     //day api
     public function getApiToDay()
     {
-
-        $con = mysqli_connect("localhost", "root", "", "webapp");
+        $con = $this->connect();
         $response = array();
         $today = date("Y-m-d");
 
@@ -92,15 +95,11 @@ class AppController extends Controller
 
     public function getApiWeek()
     {
-
-        $con = mysqli_connect("localhost", "root", "", "webapp");
+        $con = $this->connect();
         $response = array();
         $week = date("W");
-
-   
-
         if ($con) {
-           
+
             $sql = " SELECT WEEK(date) id, user_id, h_rate, work_time, date, created_at, updated_at FROM user_data  WHERE WEEK(date) = '$week' ";
             // WHERE user_id = {$_SESSION['id']}";
             $result = mysqli_query($con, $sql);
@@ -123,8 +122,7 @@ class AppController extends Controller
 
     public function getApiMonth()
     {
-
-        $con = mysqli_connect("localhost", "root", "", "webapp");
+        $con = $this->connect();
         $response = array();
         $month = date("m");
 
@@ -147,5 +145,25 @@ class AppController extends Controller
         } else {
             echo "Database connection failed";
         }
+    }
+
+    public function addTask()
+    {
+        $con = $this->connect();
+        $duree = $_POST['duree'];
+        $taux = $_POST['taux'];
+        $date = $_POST['date'];
+
+
+        $sql = "INSERT INTO `user_data`( `work_time`, `h_rate`, `date`) 
+        VALUES ('$duree','$taux','$date')";
+        if (mysqli_query($con, $sql)) {
+            echo json_encode(array("statusCode" => 200));
+        } else {
+            echo json_encode(array("statusCode" => 201));
+        }
+        mysqli_close($con);
+
+        //return $this->view('add');
     }
 }

@@ -17,6 +17,8 @@ $router->get('/api/today', 'App\Controllers\AppController@getApiToDay');
 $router->get('/api/week', 'App\Controllers\AppController@getApiWeek');
 $router->get('/api/month', 'App\Controllers\AppController@getApiMonth');
 
+$router->post('/addTask', 'App\Controllers\AppController@addTask');
+
 $router->post('/login', 'App\Controllers\AppController@loginPost');
 $router->get('/logout', 'App\Controllers\AppController@logout');
 

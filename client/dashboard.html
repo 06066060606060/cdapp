@@ -41,7 +41,7 @@
                             <img src="./img/iconcal.png" class="h-8 w-7 mr-2" alt="Windster Logo">
                             <span class="self-center whitespace-nowrap"></span>
                         </a>
-
+                        <span class="pl-2 font-bold text-xl">Easy Follow</span>
                     </div>
                     <div class="flex items-center">
                         <button id="toggleSidebarMobileSearch" type="non"
@@ -113,8 +113,8 @@
                                         class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
                                         id="selectfilter" onchange="runget(this.value)">
                                         <option id="optionx" value="month" selected>mois</option>
-                                        <option id="optionx" value="day">Jour</option>
                                         <option id="optionx" value="week">Semaine</option>
+                                        <option id="optionx" value="day">Jour</option>
 
                                     </select>
                                 </div>
@@ -401,13 +401,12 @@
 
 
                 function addData(data) {
-                    let compte = {};
-
+    
                     for (var i = 0; i < data.length; i++) {
                         let work = data[i].work_time.split(':') //temps en secondes
                         var minutes = (+work[0]) * 60 + (+work[1]);
                         let items = parseInt(data[i].h_rate / 60 * minutes)
-                        
+               
                         dataPoints.push({
                             x: new Date(data[i].date),
                             y: items
@@ -415,7 +414,7 @@
                     }
                     chart.render();
                  
-                    document.getElementById("total-container").innerHTML = items + " €";
+                    document.getElementById("total-container").innerHTML = "88" + " €";
                 }
 
 
