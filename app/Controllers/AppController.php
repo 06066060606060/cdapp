@@ -49,11 +49,13 @@ class AppController extends Controller
             $result = mysqli_query($con, $sql);
             if ($result) {
                 $x = 0;
+               
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $worktime = $row['work_time'];
                     $response[$x]['id'] = $row['id'];
                     $response[$x]['user_id'] = $row['user_id'];
                     $response[$x]['h_rate'] = $row['h_rate'];
-                    $response[$x]['work_time'] = $row['work_time'];
+                    $response[$x]['work_time'] = substr($worktime,0,-3);
                     $response[$x]['date'] = $row['date'];
                     $x++;
                 }
@@ -78,10 +80,11 @@ class AppController extends Controller
             if ($result) {
                 $x = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $worktime = $row['work_time'];
                     $response[$x]['id'] = $row['id'];
                     $response[$x]['user_id'] = $row['user_id'];
                     $response[$x]['h_rate'] = $row['h_rate'];
-                    $response[$x]['work_time'] = $row['work_time'];
+                    $response[$x]['work_time'] = substr($worktime,0,-3);
                     $response[$x]['date'] = $row['date'];
                     $x++;
                 }
@@ -106,10 +109,11 @@ class AppController extends Controller
             if ($result) {
                 $x = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $worktime = $row['work_time'];
                     $response[$x]['id'] = $row['id'];
                     $response[$x]['user_id'] = $row['user_id'];
                     $response[$x]['h_rate'] = $row['h_rate'];
-                    $response[$x]['work_time'] = $row['work_time'];
+                    $response[$x]['work_time'] = substr($worktime,0,-3);
                     $response[$x]['date'] = $row['date'];
                     $x++;
                 }
@@ -133,10 +137,11 @@ class AppController extends Controller
             if ($result) {
                 $x = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $worktime = $row['work_time'];
                     $response[$x]['id'] = $row['id'];
                     $response[$x]['user_id'] = $row['user_id'];
                     $response[$x]['h_rate'] = $row['h_rate'];
-                    $response[$x]['work_time'] = $row['work_time'];
+                    $response[$x]['work_time'] = substr($worktime,0,-3);
                     $response[$x]['date'] = $row['date'];
                     $x++;
                 }

@@ -109,13 +109,13 @@
                                             €</span>
                                         <h3 class="lemois text-base font-normal text-gray-500"></h3>
                                     </div>
+                                    <!-- <i class="fa-solid fa-arrow-left hidden" onclick="otherMonth('preview')"></i>
+                                    <i class="fa-solid fa-arrow-right hidden" onclick="otherMonth('next')"></i> -->
                                     <select name="Affichage"
                                         class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
                                         id="selectfilter" onchange="runget(this.value)">
-                                        <option id="optionx" value="month" selected>mois</option>
-                                        <option id="optionx" value="week">Semaine</option>
-                                        <option id="optionx" value="day">Jour</option>
-
+                                        <option id="optionx" value="month">mois</option>
+                                        <option id="optionx" value="week" selected>Semaine</option>
                                     </select>
                                 </div>
 
@@ -189,9 +189,8 @@
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <span id="total-container2"
+                                        <span id="today-container"
                                             class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                                            20€
                                         </span>
                                         <h3 class="text-base font-normal text-gray-500">Aujourd'hui</h3>
                                     </div>
@@ -201,9 +200,9 @@
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4 ">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">160
-                                            €
-                                        </span>
+                                        <span id="week-container"
+                                        class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                    </span>
                                         <h3 class="text-base font-normal text-gray-500">Cette semaine</h3>
                                     </div>
 
@@ -224,84 +223,15 @@
 <script src="js/canvasjs.min.js"></script>
 <script>
 
+window.addEventListener("DOMContentLoaded", (event) => {
+
+    getdata(),calculateDay(), totalWeek(), runget("week");
+    });
+
+
     function runget(opt) {
-           //API DAY------------------------------------------------------------------------
-        if (opt == "day") {
-            var url = "http://cdapp.test:88/api/today";
-  
-            charts(url);
-            function charts(url) {
-
-                var dataPoints = [];
-                let now = new Date()
-                let minus_month = new Date(now.setMonth(now.getMonth() - 1));
-                var objToday = new Date(),
-                    weekday = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'),
-                    dayOfWeek = weekday[objToday.getDay()],
-                    dayOfMonth = today + (objToday.getDate() < 10) ? '0' + objToday.getDate() : objToday.getDate(),
-                    months = new Array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'),
-                    curMonth = months[objToday.getMonth()],
-                    curYear = objToday.getFullYear()
-                var today = dayOfWeek + " " + dayOfMonth + " " + curMonth;
-                document.getElementsByClassName("lemois")[0].innerHTML = today;
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    theme: "light",
-                    axisY: {
-                        title: "Gain €",
-                        titleFontSize: 20,
-                        includeZero: true
-                    },
-                    axisX: {
-                        titleFontSize: 14,
-                        interval: 4,
-                        intervalType: "day",
-                        minimum: minus_month,
-                        valueFormatString: "DD MMM"
-                    },
-                    data: [{
-                        type: "column",
-                        yValueFormatString: "#,### €",
-                        dataPoints: dataPoints
-                    }]
-                });
-
-
-                function addData(data) {
-
-                    for (var i = 0; i < data.length; i++) {
-                        let work = data[i].work_time.split(':') //temps en secondes
-                        var minutes = (+work[0]) * 60 + (+work[1]);
-                        let items = parseInt(data[i].h_rate / 60 * minutes)
-
-                        dataPoints.push({
-                            x: new Date(data[i].date),
-                            y: items
-                        });
-
-                       
-                        document.getElementById("total-container").innerHTML = items + " €";
-                    }
-                    chart.render();
-                    
-                }
-
-
-                $.getJSON(url, addData);
-            }
-           
-        
-
-            function calculate(url) {
-                    return textFromJSON.reduce((acc, item) => {
-                        let a = item.work_time.split(':'); // copilot merci!!!!
-                        let minutes = (+a[0]) * 60 + (+a[1]);
-                        return acc + item.h_rate / 60 * minutes;
-                    }, 0);
-                }
-        }
            //API WEEK------------------------------------------------------------------------
-        else if (opt == "week") {
+       if (opt == "week") {
             var url = "http://cdapp.test:88/api/week";
         
             charts(url);
@@ -322,19 +252,18 @@
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     theme: "light",
+                    dataPointMaxWidth: 40,
                     axisY: {
-                        title: "Gain €",
+                        title: "Gain  €",
                         titleFontSize: 20,
                         includeZero: true
                     },
 
                     axisX: {
                         titleFontSize: 20,
-                        interval: 7,
-                        intervalType: "day",
-                        minimum: minus_month,
+                        interval: 1,
+                        // intervalType: "week",
                         valueFormatString: "DD MMM"
-
                     },
                     data: [{
                         type: "column",
@@ -357,39 +286,41 @@
                         });
                     }
                     chart.render();
-                    document.getElementById("total-container").innerHTML = items + " €";
+                   
                 }
 
 
                 $.getJSON(url, addData);
+                calculateWeek();
             }
         }
         //API MONTH------------------------------------------------------------------------
         else if (opt == "month") {
-            var url = "http://cdapp.test:88/api";
+            let now = new Date()
+                let minus_month = new Date(now.setMonth (now.getMonth()));
+                document.getElementsByClassName("lemois")[0].innerHTML = minus_month.toLocaleString('default', {
+                    month: 'long'
+                });
+            var url = "http://cdapp.test:88/api/month";
             charts(url)
             function charts(url) {
 
                 var dataPoints = [];
                 let now = new Date()
-                let minus_month = new Date(now.setMonth(now.getMonth() - 1));
-                document.getElementsByClassName("lemois")[0].innerHTML = minus_month.toLocaleString('default', {
-                    month: 'long'
-                });
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
+         
                     theme: "light",
                     axisY: {
-                        title: "Gain €",
+                        title: "Gain  €",
                         titleFontSize: 20,
                         includeZero: true
                     },
 
                     axisX: {
                         titleFontSize: 20,
-                        interval: 3,
-                        intervalType: "day",
-                        minimum: minus_month,
+                        interval: 1,
+                        intervalType: "month",
                         valueFormatString: "DD MMM"
                     },
                     data: [{
@@ -397,7 +328,9 @@
                         yValueFormatString: "#,### €",
                         dataPoints: dataPoints
                     }]
-                });
+                }
+                
+                );
 
 
                 function addData(data) {
@@ -413,12 +346,11 @@
                         });
                     }
                     chart.render();
-                 
-                    document.getElementById("total-container").innerHTML = "88" + " €";
                 }
 
 
                 $.getJSON(url, addData);
+                calculateMonth();
             }
         }
 
@@ -426,7 +358,6 @@
     };
 
     // API ALL DATA
-
     var url = "http://cdapp.test:88/api";
     function charts(url) {
 
@@ -440,7 +371,7 @@
             animationEnabled: true,
             theme: "light",
             axisY: {
-                title: "Gain €",
+                title: "Gain  €",
                 titleFontSize: 20,
                 includeZero: true
             },
@@ -472,20 +403,12 @@
                     y: items
                 });
             }
-            chart.render();
+           
         }
-
-
-        $.getJSON(url, addData);
     }
 
 
-
-
-    window.addEventListener("DOMContentLoaded", (event) => {
-        getdata(), charts(url);
-    });
-
+// historique
     function getdata() {
 
         fetch(url)
@@ -493,12 +416,9 @@
             .then((out) => {
                 const text = JSON.stringify(out);
                 const obj = JSON.parse(text);
-
-
                 let textFromJSON = obj;
                 textFromJSON.forEach(appendNewThing)
                 textFromJSON.forEach(calculate)
-
 
                 function appendNewThing(jsonTxt) {
                     //Temps de travail 
@@ -507,7 +427,7 @@
                     container2.className = "child-holder2";
                     let newP2 = document.createElement("p");
                     newP2.className = "child2";
-                    let newContent2 = document.createTextNode(jsonTxt.work_time);
+                    let newContent2 = document.createTextNode(jsonTxt.work_time + " " + "H");
                     newP2.appendChild(newContent2);
                     container2.appendChild(newP2);
                     document.getElementsByClassName("time-container")[0].appendChild(container2);
@@ -538,29 +458,185 @@
                     newP5.className = "child5";
                     let a = jsonTxt.work_time.split(':'); // split it at the colons
                     let minutes = (+a[0]) * 60 + (+a[1]);
-                    let newContent5 = document.createTextNode(jsonTxt.h_rate / 60 * minutes + " €");
+                    let newContent5 = document.createTextNode(Math.round(jsonTxt.h_rate / 60 * minutes) + " €");
                     newP5.appendChild(newContent5);
                     container5.appendChild(newP5);
                     document.getElementsByClassName("gain-container")[0].appendChild(container5);
-
-
-                    document.getElementById("total-container").innerHTML = calculate() + " €";
-                }
-
-
-
-                function calculate(jsonTxt) {
-                    return textFromJSON.reduce((acc, item) => {
-                        let a = item.work_time.split(':'); // copilot merci!!!!
-                        let minutes = (+a[0]) * 60 + (+a[1]);
-                        return acc + item.h_rate / 60 * minutes;
-                    }, 0);
+                    
                 }
 
             });
-
     }
+
+    function calculateDay() {
+let apiweek = "http://cdapp.test:88/api/today";
+fetch(apiweek)
+    .then((res) => res.json())
+    .then((out) => {
+        const text = JSON.stringify(out);
+        const obj = JSON.parse(text);
+        let textFromJSON = obj;
+        textFromJSON.forEach(appendNewThing)
+        textFromJSON.forEach(calculatetoday)
+
+        function appendNewThing(jsonTxt) {
+            document.getElementById("today-container").innerHTML = calculatetoday() + " €";
+        }
+
+        function calculatetoday(jsonTxt) {
+            return textFromJSON.reduce((acc, item) => {
+                let a = item.work_time.split(':'); // copilot merci!!!!
+                let minutes = (+a[0]) * 60 + (+a[1]);
+                return acc + item.h_rate / 60 * minutes;
+            }, 0);
+        }
+    });
+}
+
+    function calculateWeek() {
+let apiweek = "http://cdapp.test:88/api/week";
+fetch(apiweek)
+    .then((res) => res.json())
+    .then((out) => {
+        const text = JSON.stringify(out);
+        const obj = JSON.parse(text);
+        let textFromJSON = obj;
+        textFromJSON.forEach(appendNewThing)
+        textFromJSON.forEach(calculatew)
+
+        function appendNewThing(jsonTxt) {
+            document.getElementById("total-container").innerHTML = calculatew() + " €";
+        }
+
+        function calculatew(jsonTxt) {
+            return textFromJSON.reduce((acc, item) => {
+                let a = item.work_time.split(':'); // copilot merci!!!!
+                let minutes = (+a[0]) * 60 + (+a[1]);
+                return acc + item.h_rate / 60 * minutes;
+            }, 0);
+        }
+    });
+}
+
+function totalWeek() {
+let apiweek = "http://cdapp.test:88/api/week";
+fetch(apiweek)
+    .then((res) => res.json())
+    .then((out) => {
+        const text = JSON.stringify(out);
+        const obj = JSON.parse(text);
+        let textFromJSON = obj;
+        textFromJSON.forEach(appendNewThing)
+        textFromJSON.forEach(calculatex)
+
+        function appendNewThing(jsonTxt) {
+            document.getElementById("week-container").innerHTML = calculatex() + " €";
+        }
+
+        function calculatex(jsonTxt) {
+            return textFromJSON.reduce((acc, item) => {
+                let a = item.work_time.split(':'); // copilot merci!!!!
+                let minutes = (+a[0]) * 60 + (+a[1]);
+                return acc + item.h_rate / 60 * minutes;
+            }, 0);
+        }
+    });
+}
   
+function calculateMonth() {
+let apiweek = "http://cdapp.test:88/api/month";
+fetch(apiweek)
+    .then((res) => res.json())
+    .then((out) => {
+        const text = JSON.stringify(out);
+        const obj = JSON.parse(text);
+        let textFromJSON = obj;
+        textFromJSON.forEach(appendNewThing)
+        textFromJSON.forEach(calculatez)
+
+        function appendNewThing(jsonTxt) {
+            document.getElementById("total-container").innerHTML = calculatez() + " €";
+        }
+
+        function calculatez(jsonTxt) {
+            return textFromJSON.reduce((acc, item) => {
+                let a = item.work_time.split(':'); // copilot merci!!!!
+                let minutes = (+a[0]) * 60 + (+a[1]);
+                return acc + item.h_rate / 60 * minutes;
+            }, 0);
+        }
+    });
+}
+
+ function otherMonth(other) {
+
+              let now = new Date()
+                if (other == "next") {
+                    console.log(other);
+                    thismonth = new Date(now.setMonth (now.getMonth()+ 1)).toLocaleString('default', {
+                    month: 'long'
+                });
+                } else if (other == "preview") {
+                    console.log(other);
+                    thismonth = new Date(now.setMonth (now.getMonth() - 1)).toLocaleString('default', {
+                    month: 'long'
+                });
+                } 
+                // document.getElementsByClassName("fa-arrow-left ")[0].style.display = "block";
+                // document.getElementsByClassName("fa-arrow-right ")[0].style.display = "block";
+                document.getElementsByClassName("lemois")[0].innerHTML = thismonth;
+            var url = "http://cdapp.test:88/api/month";
+            charts(url)
+            function charts(url) {
+
+                var dataPoints = [];
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+         
+                    theme: "light",
+                    axisY: {
+                        title: "Gain  €",
+                        titleFontSize: 20,
+                        includeZero: true
+                    },
+
+                    axisX: {
+                        titleFontSize: 20,
+                        interval: 1,
+                        intervalType: "month",
+                        valueFormatString: "DD MMM"
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,### €",
+                        dataPoints: dataPoints
+                    }]
+                }
+                
+                );
+
+
+                function addData(data) {
+    
+                    for (var i = 0; i < data.length; i++) {
+                        let work = data[i].work_time.split(':') //temps en secondes
+                        var minutes = (+work[0]) * 60 + (+work[1]);
+                        let items = parseInt(data[i].h_rate / 60 * minutes)
+               
+                        dataPoints.push({
+                            x: new Date(data[i].date),
+                            y: items
+                        });
+                    }
+                    chart.render();
+                }
+
+
+                $.getJSON(url, addData);
+                calculateMonth();
+            }
+        }
+
 </script>
 <style>
     .canvasjs-chart-credit {

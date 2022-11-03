@@ -1,41 +1,32 @@
-let url = "http://cdapp.test:88/api";
-//let token = localStorage.getItem("token");  //pour plus tard...
-  newDates = [];
+
   
 
-function grabJson() {
-  fetch(url)
-    .then((res) => res.json())
-    .then((out) => {
-      const text = JSON.stringify(out);
-      const obj = JSON.parse(text);
-      let textFromJSON = obj;
-     
-
-      textFromJSON.forEach( value =>{
-        let date = new Date(value.date);
-        newDates.push(date.toString());
-     
-      });
-
-
-    });
-    console.log(newDates);
-    return newDates;
-  }
 
 
 function CalendarApp(date) {
-  //this.aptDates = ['Sat Nov 12 2022 04:00:00 GMT+0400 (heure normale de Maurice)'];
-  
-  this.aptDates = grabJson();
+ mydatemod = [];
+ jsone();
+function jsone() {
+  let url = "http://cdapp.test:88/api";
+  newDates = [];
+  fetch(url)
+  .then((res) => res.json())
+  .then((out) => {
+      const text = JSON.stringify(out);
+      const obj = JSON.parse(text);
+      let textFromJSON = obj;
+      textFromJSON.forEach(appendNewThing)
+    })
+
+    function appendNewThing(jsonTxt) {
+        mydatemod.push(jsonTxt.date.split('-').reverse().join(', '));
+    }
+}
  
 
+ console.log(mydatemod);
 
-   //this.aptDates = [new Date(2022, 10, 01).toString(), new Date(2022, 10, 09).toString()]; // original
-
- 
-
+  this.aptDates = [new Date(2022, 10, 12).toString()]; // original
 
   if (!(date instanceof Date)) {
     date = new Date();
@@ -183,6 +174,8 @@ CalendarApp.prototype.openDayWindow = function (date) {
   console.log("openDayWindow");
   var now = new Date();
   var day = new Date(date);
+  var today = day.getFullYear() + "/" + (day.getMonth() + 1) + "/" + day.getDate();
+  document.getElementById("date").value = today;
   this.dayViewDateEle.textContent = this.days[day.getDay()] + " " + day.getDate() + " " + this.months[day.getMonth()] + " " + day.getFullYear();
   this.dayViewDateEle.setAttribute('data-date', day);
   this.dayViewEle.classList.add("calendar--day-view-active");
