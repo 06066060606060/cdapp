@@ -102,22 +102,29 @@
 
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
                                 <div class="flex items-center justify-between mb-4">
+                                    
                                     <div class="flex-shrink-0">
-                                        <span id="total-container"
-                                            class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        <span id="total-container" class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                                             €</span>
                                         <h3 class="lemois text-base font-normal text-gray-500"></h3>
                                     </div>
-
+                                    <select name="Affichage"
+                                    class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
+                                    id="selectfilter" onchange="runget(this.value)">
+                                    <option id="optionx" value="all" selected>Affichage</option>
+                                    <option id="optionx" value="day">Jour</option>
+                                    <option id="optionx" value="week">Semaine</option>
+                                    <option id="optionx" value="month">mois</option>
+                                </select>
                                 </div>
+                           
                                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                             </div>
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                                 <div class="mb-4 flex items-center justify-between">
                                     <div>
                                         <h3 class="text-xl font-bold text-gray-900 mb-2">Historiques</h3>
-                                        <span class="text-base font-normal text-gray-500">La liste des derniers
-                                            historiques</span>
+                                        <span class="text-base font-normal text-gray-500">Derniéres activitées</span>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <a href="./history.html"
@@ -181,8 +188,8 @@
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <span id="total-container2"
-                                            class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        <span id="total-container2" class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                            20€
                                         </span>
                                         <h3 class="text-base font-normal text-gray-500">Aujourd'hui</h3>
                                     </div>
@@ -192,9 +199,10 @@
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4 ">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">860
-                                            €</span>
-                                        <h3 class="text-base font-normal text-gray-500">La semaine derniére</h3>
+                                        <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">160
+                                            €
+                                        </span>
+                                        <h3 class="text-base font-normal text-gray-500">Cette semaine</h3>
                                     </div>
 
                                 </div>
@@ -211,7 +219,33 @@
     </div>
 </body>
 <script>
-    window.onload = function () {
+
+function runget(opt){
+   if (opt == "all"){
+    var url = "http://cdapp.test:88/api/";
+     getToDayData();
+     charts(url);
+   }
+   else if (opt == "day"){
+    var url = "http://cdapp.test:88/api/today";
+     getToDayData();
+     charts(url);
+   }
+   else if (opt == "week"){
+    var url = "http://cdapp.test:88/api/week";
+    getdataWeek();
+    charts(url);
+   }
+   else if (opt == "month"){
+     var url = "http://cdapp.test:88/api/month";
+     getToDayMonth();
+     charts(url);
+   }
+
+
+};
+var url = "http://cdapp.test:88/api";
+function charts(url) {
 
         var dataPoints = [];
         let now = new Date()
@@ -259,7 +293,7 @@
             chart.render();
         }
 
-        var url = "http://cdapp.test:88/api";
+       
         $.getJSON(url, addData);
     }
 
@@ -273,7 +307,7 @@
 
 
     window.addEventListener("DOMContentLoaded", (event) => {
-        getdata(), getToDayData(), getdataWeek(), getdataMonth()
+        getdata(), charts(url)
     });
 
     function getdata() {
@@ -353,7 +387,7 @@
 
     var url2 = "http://cdapp.test:88/api/today";
     function getToDayData() {
-
+         console.log("getToDayData")
         fetch(url2)
             .then((res) => res.json())
             .then((out) => {
@@ -366,6 +400,14 @@
                     //Temps de travail 
                     // console.log(jsonTxt)
                     document.getElementById("total-container2").innerHTML = calculate2() + " €";
+                }
+
+                function calculate2(jsonTxt) {
+                    return textFromJSON.reduce((acc, item) => {
+                        let a = item.work_time.split(':'); // copilot merci!!!!
+                        let minutes = (+a[0]) * 60 + (+a[1]);
+                        return acc + item.h_rate / 60 * minutes;
+                    }, 0);
                 }
             });
     }
@@ -385,11 +427,19 @@
                     // console.log(jsonTxt)
                     document.getElementById("total-container2").innerHTML = calculate2() + " €";
                 }
+                function calculate2(jsonTxt) {
+                    return textFromJSON.reduce((acc, item) => {
+                        let a = item.work_time.split(':'); // copilot merci!!!!
+                        let minutes = (+a[0]) * 60 + (+a[1]);
+                        return acc + item.h_rate / 60 * minutes;
+                    }, 0);
+                }
             });
     }
 
     var url4 = "http://cdapp.test:88/api/month";
     function getToDayMonth() {
+        console.log("getToMonthData")
         fetch(url2)
             .then((res) => res.json())
             .then((out) => {
@@ -402,6 +452,14 @@
                     //Temps de travail 
                     // console.log(jsonTxt)
                     document.getElementById("total-container2").innerHTML = calculate2() + " €";
+                }
+
+                function calculate2(jsonTxt) {
+                    return textFromJSON.reduce((acc, item) => {
+                        let a = item.work_time.split(':'); // copilot merci!!!!
+                        let minutes = (+a[0]) * 60 + (+a[1]);
+                        return acc + item.h_rate / 60 * minutes;
+                    }, 0);
                 }
             });
     }
