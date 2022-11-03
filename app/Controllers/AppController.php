@@ -95,11 +95,13 @@ class AppController extends Controller
 
         $con = mysqli_connect("localhost", "root", "", "webapp");
         $response = array();
-        $today = date("Y-m-d");
-        $thisdate = strtotime($today);
-        $theweek = strtotime("+7 day", $thisdate);
+        $week = date("W");
+
+   
+
         if ($con) {
-            $sql = "SELECT * FROM user_data WHERE user_data.date > '$theweek'";
+           
+            $sql = " SELECT WEEK(date) id, user_id, h_rate, work_time, date, created_at, updated_at FROM user_data  WHERE WEEK(date) = '$week' ";
             // WHERE user_id = {$_SESSION['id']}";
             $result = mysqli_query($con, $sql);
             if ($result) {
@@ -124,10 +126,10 @@ class AppController extends Controller
 
         $con = mysqli_connect("localhost", "root", "", "webapp");
         $response = array();
-        $today = date("Y-m-d");
+        $month = date("m");
 
         if ($con) {
-            $sql = "SELECT * FROM user_data WHERE user_data.date = '$today'";
+            $sql = "SELECT MONTH(date) id, user_id, h_rate, work_time, date, created_at, updated_at FROM user_data WHERE MONTH(date) = '$month'";
             // WHERE user_id = {$_SESSION['id']}";
             $result = mysqli_query($con, $sql);
             if ($result) {
