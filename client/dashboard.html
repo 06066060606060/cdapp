@@ -49,7 +49,6 @@
                         </button>
                     </div>
         </nav>
-        
         <div class="flex overflow-hidden bg-white pt-16">
             <aside id="sidebar"
                 class="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
@@ -103,22 +102,23 @@
 
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
                                 <div class="flex items-center justify-between mb-4">
-                                    
+
                                     <div class="flex-shrink-0">
-                                        <span id="total-container" class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        <span id="total-container"
+                                            class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                                             €</span>
                                         <h3 class="lemois text-base font-normal text-gray-500"></h3>
                                     </div>
                                     <select name="Affichage"
-                                    class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
-                                    id="selectfilter" onchange="runget(this.value)">
-                                    <option id="optionx" value="all" selected>Affichage</option>
-                                    <option id="optionx" value="day">Jour</option>
-                                    <option id="optionx" value="week">Semaine</option>
-                                    <option id="optionx" value="month">mois</option>
-                                </select>
+                                        class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
+                                        id="selectfilter" onchange="runget(this.value)">
+                                        <option id="optionx" value="month" selected>mois</option>
+                                        <option id="optionx" value="day">Jour</option>
+                                        <option id="optionx" value="week">Semaine</option>
+                                       
+                                    </select>
                                 </div>
-                           
+
                                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                             </div>
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
@@ -189,7 +189,8 @@
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mb-4">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <span id="total-container2" class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        <span id="total-container2"
+                                            class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                                             20€
                                         </span>
                                         <h3 class="text-base font-normal text-gray-500">Aujourd'hui</h3>
@@ -221,32 +222,198 @@
 </body>
 <script>
 
-function runget(opt){
-   if (opt == "all"){
-    var url = "http://cdapp.test:88/api/";
-     getToDayData();
-     charts(url);
-   }
-   else if (opt == "day"){
-    var url = "http://cdapp.test:88/api/today";
-     getToDayData();
-     charts(url);
-   }
-   else if (opt == "week"){
-    var url = "http://cdapp.test:88/api/week";
-    getdataWeek();
-    charts(url);
-   }
-   else if (opt == "month"){
-     var url = "http://cdapp.test:88/api/month";
-     getToDayMonth();
-     charts(url);
-   }
+    function runget(opt) { 
+         if (opt == "day") {
+            var url = "http://cdapp.test:88/api/today";
+            getToDayData();
+            charts(url);
+            function charts(url) {
+
+                var dataPoints = [];
+                let now = new Date()
+                let minus_month = new Date(now.setMonth(now.getMonth() - 1));
+                var objToday = new Date(),
+                    weekday = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'),
+                    dayOfWeek = weekday[objToday.getDay()],
+                    dayOfMonth = today + (objToday.getDate() < 10) ? '0' + objToday.getDate() : objToday.getDate(),
+                    months = new Array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'),
+                    curMonth = months[objToday.getMonth()],
+                    curYear = objToday.getFullYear()
+                var today = dayOfWeek + " " + dayOfMonth + " " + curMonth;
+                document.getElementsByClassName("lemois")[0].innerHTML = today;
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    theme: "light",
+                    axisY: {
+                        title: "Gain €",
+                        titleFontSize: 20,
+                        includeZero: true
+                    },
+                    axisX: {
+                        titleFontSize: 14,
+                        interval: 4,
+                        intervalType: "day",
+                        minimum: minus_month,
+                        valueFormatString: "DD MMM"
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,### €",
+                        dataPoints: dataPoints
+                    }]
+                });
 
 
-};
-var url = "http://cdapp.test:88/api";
-function charts(url) {
+                function addData(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        let work = data[i].work_time.split(':') //temps en secondes
+                        var minutes = (+work[0]) * 60 + (+work[1]);
+                        let items = parseInt(data[i].h_rate / 60 * minutes)
+
+                        dataPoints.push({
+                            x: new Date(data[i].date),
+                            y: items
+                        });
+                    }
+                    chart.render();
+                }
+
+
+                $.getJSON(url, addData);
+            }
+        }
+        else if (opt == "week") {
+            var url = "http://cdapp.test:88/api/week";
+            getdataWeek();
+            charts(url);
+            function charts(url) {
+
+                var dataPoints = [];
+                let now = new Date()
+                let minus_month = new Date(now.setMonth(now.getMonth() - 1));
+                var objToday = new Date(),
+                    weekday = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'),
+                    dayOfWeek = weekday[objToday.getDay()],
+                    dayOfMonth = today + (objToday.getDate() < 10) ? '0' + objToday.getDate() : objToday.getDate(),
+                    months = new Array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'),
+                    curMonth = months[objToday.getMonth()],
+                    curYear = objToday.getFullYear()
+                var today = "Semaine du" + " " + dayOfMonth + " " + curMonth;
+                document.getElementsByClassName("lemois")[0].innerHTML = today;
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    theme: "light",
+                    axisY: {
+                        title: "Gain €",
+                        titleFontSize: 20,
+                        includeZero: true
+                    },
+
+                    axisX: {
+                        titleFontSize: 20,
+                        interval: 4,
+                        intervalType: "week",
+                        minimum: minus_month,
+                        valueFormatString: "DD MMM"
+                        
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,### €",
+                        dataPoints: dataPoints
+                    }]
+                });
+
+
+                function addData(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        let work = data[i].work_time.split(':') //temps en secondes
+                        var minutes = (+work[0]) * 60 + (+work[1]);
+                        let items = parseInt(data[i].h_rate / 60 * minutes)
+
+                        dataPoints.push({
+                            x: new Date(data[i].date),
+                            y: items
+                        });
+                    }
+                    chart.render();
+                }
+
+
+                $.getJSON(url, addData);
+            }
+        }
+        else if (opt == "month") {
+            var url = "http://cdapp.test:88/api/month";
+            getToDayMonth();
+            charts(url);
+            function charts(url) {
+
+                var dataPoints = [];
+                let now = new Date()
+                let minus_month = new Date(now.setMonth(now.getMonth() + 0));
+                document.getElementsByClassName("lemois")[0].innerHTML = minus_month.toLocaleString('default', {
+                    month: 'long'
+                });
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    theme: "light",
+                    axisY: {
+                        title: "Gain €",
+                        titleFontSize: 20,
+                        includeZero: true
+                    },
+
+                    axisX: {
+                        title: "",
+                        titleFontSize: 20,
+                        interval: 1,
+                        intervalType: "month",
+                        minimum: minus_month,
+                        valueFormatString: "DD MMM"
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,### €",
+                        dataPoints: dataPoints
+                    }]
+                });
+
+
+                function addData(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        let work = data[i].work_time.split(':') //temps en secondes
+                        var minutes = (+work[0]) * 60 + (+work[1]);
+                        let items = parseInt(data[i].h_rate / 60 * minutes)
+
+                        dataPoints.push({
+                            x: new Date(data[i].date),
+                            y: items
+                        });
+                    }
+                    chart.render();
+                }
+
+
+                $.getJSON(url, addData);
+            }
+        }
+
+
+    };
+
+
+
+</script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="js/canvasjs.min.js"></script>
+<script>
+
+    var url = "http://cdapp.test:88/api";
+    function charts(url) {
 
         var dataPoints = [];
         let now = new Date()
@@ -264,7 +431,6 @@ function charts(url) {
             },
 
             axisX: {
-                title: "Date",
                 titleFontSize: 20,
                 interval: 3,
                 intervalType: "day",
@@ -294,21 +460,15 @@ function charts(url) {
             chart.render();
         }
 
-       
+
         $.getJSON(url, addData);
     }
 
-</script>
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="js/canvasjs.min.js"></script>
-<script>
 
-
-    var url = "http://cdapp.test:88/api";
 
 
     window.addEventListener("DOMContentLoaded", (event) => {
-        getdata(), charts(url)
+        getdata(), charts(url);
     });
 
     function getdata() {
@@ -388,7 +548,7 @@ function charts(url) {
 
     var url2 = "http://cdapp.test:88/api/today";
     function getToDayData() {
-         console.log("getToDayData")
+        console.log("getToDayData")
         fetch(url2)
             .then((res) => res.json())
             .then((out) => {
