@@ -115,7 +115,7 @@
                                         <option id="optionx" value="month" selected>mois</option>
                                         <option id="optionx" value="day">Jour</option>
                                         <option id="optionx" value="week">Semaine</option>
-                                       
+
                                     </select>
                                 </div>
 
@@ -220,10 +220,12 @@
         <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
     </div>
 </body>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="js/canvasjs.min.js"></script>
 <script>
 
-    function runget(opt) { 
-         if (opt == "day") {
+    function runget(opt) {
+        if (opt == "day") {
             var url = "http://cdapp.test:88/api/today";
             getToDayData();
             charts(url);
@@ -312,11 +314,11 @@
 
                     axisX: {
                         titleFontSize: 20,
-                        interval: 4,
-                        intervalType: "week",
+                        interval: 7,
+                        intervalType: "day",
                         minimum: minus_month,
                         valueFormatString: "DD MMM"
-                        
+
                     },
                     data: [{
                         type: "column",
@@ -346,14 +348,13 @@
             }
         }
         else if (opt == "month") {
-            var url = "http://cdapp.test:88/api/month";
-            getToDayMonth();
-            charts(url);
+            var url = "http://cdapp.test:88/api";
+            charts(url)
             function charts(url) {
 
                 var dataPoints = [];
                 let now = new Date()
-                let minus_month = new Date(now.setMonth(now.getMonth() + 0));
+                let minus_month = new Date(now.setMonth(now.getMonth() - 1));
                 document.getElementsByClassName("lemois")[0].innerHTML = minus_month.toLocaleString('default', {
                     month: 'long'
                 });
@@ -367,10 +368,9 @@
                     },
 
                     axisX: {
-                        title: "",
                         titleFontSize: 20,
-                        interval: 1,
-                        intervalType: "month",
+                        interval: 3,
+                        intervalType: "day",
                         minimum: minus_month,
                         valueFormatString: "DD MMM"
                     },
@@ -404,13 +404,6 @@
 
 
     };
-
-
-
-</script>
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="js/canvasjs.min.js"></script>
-<script>
 
     var url = "http://cdapp.test:88/api";
     function charts(url) {
