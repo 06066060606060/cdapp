@@ -107,7 +107,7 @@
                                         <span id="total-container"
                                             class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                                             €</span>
-                                        <h3 class="text-base font-normal text-gray-500">Cette Semaine</h3>
+                                        <h3 class="lemois text-base font-normal text-gray-500"></h3>
                                     </div>
 
                                 </div>
@@ -215,7 +215,11 @@
 window.onload = function() {
 
     var dataPoints = [];
-    
+    let now = new Date()
+    let minus_month = new Date(now.setMonth(now.getMonth() - 1));
+    document.getElementsByClassName("lemois")[0].innerHTML = minus_month.toLocaleString('default', {
+        month: 'long'
+    });
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         theme: "light",
@@ -223,6 +227,15 @@ window.onload = function() {
             title: "Gain €",
             titleFontSize: 20,
             includeZero: true
+        },
+        
+        axisX: {
+            title: "Date",
+            titleFontSize: 20,
+            interval: 3,
+            intervalType: "day",
+            minimum: minus_month,
+            valueFormatString: "DD MMM"
         },
         data: [{
             type: "column",
@@ -235,10 +248,9 @@ window.onload = function() {
     function addData(data) {
        
         for (var i = 0; i < data.length; i++) {
-             let work = data[i].work_time.split(':')
-             let minutes = (+work[0]) * 60 + (+work[1])
-             let out =  work + data.h_rate / 60 * minutes
-             let items = parseInt(out)
+             let work = data[i].work_time.split(':') //temps en secondes
+             var minutes = (+work[0]) * 60 + (+work[1]);
+             let items = parseInt(data[i].h_rate / 60 * minutes)
 
             dataPoints.push({
                 x: new Date(data[i].date),
@@ -262,7 +274,7 @@ window.onload = function() {
     var url2 = "http://cdapp.test:88/apidate";
 
     window.addEventListener("DOMContentLoaded", (event) => {
-        getdata(), getToDayData()
+        getdata(), getToDayData(), getdataWeek(), getdataMonth()
     });
 
     function getdata() {
@@ -270,14 +282,10 @@ window.onload = function() {
         fetch(url)
             .then((res) => res.json())
             .then((out) => {
-
-               
-
                 const text = JSON.stringify(out);
                 const obj = JSON.parse(text);
 
-               
-
+             
                 let textFromJSON = obj;
                 textFromJSON.forEach(appendNewThing)
                 textFromJSON.forEach(calculate)
@@ -330,6 +338,8 @@ window.onload = function() {
                     document.getElementById("total-container").innerHTML = calculate() + " €";
                 }
                
+
+
                 function calculate(jsonTxt) {
                     return textFromJSON.reduce((acc, item) => {
                         let a = item.work_time.split(':'); // copilot merci!!!!
@@ -362,7 +372,7 @@ fetch(url2)
 
         function appendNewThing(jsonTxt) {
             //Temps de travail 
-          
+           // console.log(jsonTxt)
 
             document.getElementById("total-container2").innerHTML = calculate2() + " €";
         }
@@ -378,6 +388,17 @@ fetch(url2)
             }
     });
 }
+
+function getToDayWeek() {
+
+}
+
+function getToDayMonth() {
+
+}
+
+
+
 </script>
 
 </html>
