@@ -13,7 +13,6 @@ class AppController extends Controller {
 
 
 
-
    public function loginPost() {
       
       $this->isAdmin();
@@ -67,7 +66,7 @@ class AppController extends Controller {
          $con = mysqli_connect("localhost", "root", "", "webapp");
      $response = array();
      if($con){
-         $sql = "SELECT * FROM user_data ORDER BY date DESC ";
+         $sql = "SELECT * FROM user_data WHERE user_data.user_id = '1' ORDER BY date DESC ";
          //  WHERE user_id = {$_SESSION['id']}";
          $result = mysqli_query($con, $sql);
          if($result){
