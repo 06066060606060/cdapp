@@ -1,6 +1,7 @@
 let url = "http://cdapp.test:88/api";
 //let token = localStorage.getItem("token");  //pour plus tard...
   newDates = [];
+  
 
 function grabJson() {
   fetch(url)
@@ -8,24 +9,32 @@ function grabJson() {
     .then((out) => {
       const text = JSON.stringify(out);
       const obj = JSON.parse(text);
-      // console.table(obj);
       let textFromJSON = obj;
-      textFromJSON.forEach((item) => {  //boucle le json
-        newDates.push(new Date(item.date).toString()); //push les dates dans un tableau
+     
+
+      textFromJSON.forEach( value =>{
+        let date = new Date(value.date);
+        newDates.push(date.toString());
+     
       });
-    })
-}
 
-function CalendarApp(date) {
-  grabJson();
+
+    });
+    console.log(newDates);
+    return newDates;
+  }
+
+
+function CalendarApp(date, newdate) {
+  //this.aptDates = ['Sat Nov 12 2022 04:00:00 GMT+0400 (heure normale de Maurice)'];
   
-
-  console.log(newDates);
-  
-  // this.aptDates = [new Date(2022, 11, 01).toString(), new Date(2022, 11, 09).toString()]; // original
-  this.aptDates = newDates; //test json!!!.... :@
+  this.aptDates = grabJson();
+ 
 
 
+   //this.aptDates = [new Date(2022, 10, 01).toString(), new Date(2022, 10, 09).toString()]; // original
+
+ 
 
 
   if (!(date instanceof Date)) {
@@ -165,6 +174,7 @@ CalendarApp.prototype.showView = function (date) {
 
 
 CalendarApp.prototype.showDay = function (e, dayEle) {
+  
   e.stopPropagation();
   if (!dayEle) {
     dayEle = e.currentTarget;
@@ -219,6 +229,7 @@ CalendarApp.prototype.openDayWindow = function (date) {
 };
 
 CalendarApp.prototype.showEventsCreateElesView = function (events) {
+
   var ul = document.createElement("ul");
   ul.className = 'day-event-list-ul';
   events = this.sortEventsByTime(events);
@@ -292,6 +303,7 @@ CalendarApp.prototype.sortEventsByTime = function (events) {
 
 
 CalendarApp.prototype.showEventsByDay = function (day) {
+  
   var _events = [];
   this.apts.forEach(function (apt, idx) {
     if (day.toString() == apt.day.toString()) {

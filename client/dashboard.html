@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/calendar.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/59ecaaffaa.js" crossorigin="anonymous"></script>
+
     <script defer src="js/auth.js"></script>
     <script defer src="js/init.js"></script>
 
@@ -110,7 +111,7 @@
                                     </div>
 
                                 </div>
-                                <div id="main-chart"></div>
+                                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                             </div>
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                                 <div class="mb-4 flex items-center justify-between">
@@ -211,9 +212,54 @@
     </div>
 </body>
 <script>
+window.onload = function() {
 
-    var url = "http://cdapp.test:80/api";
-    var url2 = "http://cdapp.test:80/apidate";
+    var dataPoints = [];
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light",
+        axisY: {
+            title: "Gain €",
+            titleFontSize: 20,
+            includeZero: true
+        },
+        data: [{
+            type: "column",
+            yValueFormatString: "#,### €",
+            dataPoints: dataPoints
+        }]
+    });
+
+
+    function addData(data) {
+       
+        for (var i = 0; i < data.length; i++) {
+             let work = data[i].work_time.split(':')
+             let minutes = (+work[0]) * 60 + (+work[1])
+             let out =  work + data.h_rate / 60 * minutes
+             let items = parseInt(out)
+
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y: items
+            });
+        }
+        chart.render();
+    }
+
+    var url = "http://cdapp.test:88/api";
+    $.getJSON(url, addData);
+    }
+
+</script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="js/canvasjs.min.js"></script>
+<script>
+
+
+    var url = "http://cdapp.test:88/api";
+    var url2 = "http://cdapp.test:88/apidate";
 
     window.addEventListener("DOMContentLoaded", (event) => {
         getdata(), getToDayData()
@@ -248,6 +294,7 @@
                     newP2.appendChild(newContent2);
                     container2.appendChild(newP2);
                     document.getElementsByClassName("time-container")[0].appendChild(container2);
+
                     //Taux horaire
                     let container3 = document.createElement("div");
                     container3.className = "child-holder3";
@@ -281,12 +328,8 @@
 
 
                     document.getElementById("total-container").innerHTML = calculate() + " €";
-
-                 
-
                 }
                
-
                 function calculate(jsonTxt) {
                     return textFromJSON.reduce((acc, item) => {
                         let a = item.work_time.split(':'); // copilot merci!!!!

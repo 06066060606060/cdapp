@@ -77,7 +77,7 @@ class AppController extends Controller {
                  $response[$x]['user_id'] = $row['user_id'];
                  $response[$x]['h_rate'] = $row['h_rate'];
                  $response[$x]['work_time'] = $row['work_time'];
-                 $response[$x]['date']= $row['date'];        
+                 $response[$x]['date']= $row['date'];
                  $x++;
              }
      echo json_encode($response, JSON_PRETTY_PRINT);
@@ -104,7 +104,7 @@ class AppController extends Controller {
                  $response[$x]['user_id'] = $row['user_id'];
                  $response[$x]['h_rate'] = $row['h_rate'];
                  $response[$x]['work_time'] = $row['work_time'];
-                 $response[$x]['date']= $row['date'];        
+                 $response[$x]['date']= $row['date'];       
                  $x++;
              }
      echo json_encode($response, JSON_PRETTY_PRINT);
