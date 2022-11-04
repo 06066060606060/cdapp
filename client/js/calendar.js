@@ -2,33 +2,38 @@
   
 
 
+ function jsone() {
+  mydatemod = [];
+  meddates = counted();
+  let url = "http://cdapp.test:88/api";
+  fetch(url)
+.then((res) => res.json())
+.then((out) => {
+    const text = JSON.stringify(out);
+    const obj = JSON.parse(text);
+    let textFromJSON = obj;
+    textFromJSON.forEach(appendNewThing)
+  })
+}
+
+function appendNewThing(jsonTxt) {
+  mydatemod.push(new Date(jsonTxt.date.split('-').join(', ')).toString());
+  counted();
+}
+
+function counted() {
+  return new Array(mydatemod);
+}
 
 
 function CalendarApp(date) {
-let mydatemod = {};
- jsone();
-function jsone() {
-  let url = "http://cdapp.test:88/api";
-  newDates = [];
-  fetch(url)
-  .then((res) => res.json())
-  .then((out) => {
-      const text = JSON.stringify(out);
-      const obj = JSON.parse(text);
-      let textFromJSON = obj;
-      textFromJSON.forEach(appendNewThing)
-    })
+  jsone();
 
-    function appendNewThing(jsonTxt) {
-      mydatemod = (jsonTxt.date.split('-').join(', '));
-     
-    }
-    console.log(mydatemod);
-}
- 
+  this.aptDates = meddates[0]; // original
+  
+ // this.aptDates = [new Date(2022, 10, 22).toString(),  new Date(2022, 10, 22).toString()] ;
 
-
-  this.aptDates = [new Date().toString()]; // original
+  console.log(this.aptDates );
 
   if (!(date instanceof Date)) {
     date = new Date();
