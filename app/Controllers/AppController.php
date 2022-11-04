@@ -19,7 +19,6 @@ class AppController extends Controller
         return mysqli_connect("localhost", "root", "", "webapp");
     }
 
-
     public function loginPost()
     {
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);

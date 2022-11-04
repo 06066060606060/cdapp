@@ -189,6 +189,10 @@
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script>
+
+
+
+
                 function mafonction() {
                     let start = document.getElementById('duree').value.split(':');
                     let end = document.getElementById('duree2').value.split(':');
@@ -206,13 +210,14 @@
                 
                
                 $(document).ready(function () {
-                  
+            
                     $('#butsave').on('click', function () {
+                        alert('Tache ajouté');
                         mafonction();
                         var duree = $('#diff').val();
                         var date = $('#date').val();
                         var taux = $('#taux').val();
-
+                       
                         if (duree != "" && date != "" && taux != "") {
                             $.ajax({
                                 url: 'http://cdapp.test:88/addTask',
@@ -229,7 +234,9 @@
                                 error: function (error) {
                                     console.log(error);
                                 }
+                              
                             });
+                         
                         }
                         else {
                             alert('Please fill all the field !');
@@ -241,5 +248,6 @@
             <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 </body>
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
 
 </html>
