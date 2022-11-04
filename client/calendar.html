@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="./css/stylesheet.css">
     <link rel="stylesheet" href="./css/backend.css">
     <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="./css/calendarh.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/59ecaaffaa.js" crossorigin="anonymous"></script>
     <script defer src="js/auth.js"></script>
     <script defer src="js/init.js"></script>
+    <script defer src="js/hf.js"></script>
+    <script defer src="js/hd.js"></script>
 
 </head>
 
@@ -102,27 +105,61 @@
                             <span class="day-view-date" id="day-view-date"></span>
                             <div class="day-view-content">
                                 <div class="flex flex-row justify-center pt-10">
-                                    <form id="fupForm" name="form1" method="post">
+                                    <form class="" id="fupForm" name="form1" method="post">
                                         <div class="form-group">
-                                            <label for="email">taux:</label>
-                                            <input type="number" class="form-control" id="taux" placeholder=""
-                                                name="taux" value="55">
+                                            <div class="flex justify-center">
+                                                <label class="block text-black font-bold md:text-right mt-2 pr-4"
+                                                    for="email">Taux horaire en Euro :</label>
+                                                <input type="number"
+                                                    class="form-control bg-gray-100 appearance-none border-2 border-gray-100 rounded w-24 py-2 px-4 text-black leading-tight focus:outline-none focus:bg-gray-50 focus:border-blue-500"
+                                                    id="taux" placeholder="" name="taux" value="55">
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control hidden" id="date" placeholder="" name="date"
-                                                value="">
+                                            <input type="text" class="form-control hidden" id="date" placeholder=""
+                                                name="date" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="pwd">duree:</label>
-                                            <input type="text" class="form-control" id="duree" placeholder=""
-                                                name="duree" value="5">
-                                        </div>
 
-                                        <button name="save" class="btn btn-primary p-2 border" value="Save to database"
-                                            id="butsave">save</button>
+                                            <div class="flex mt-7">
+
+                                                <div class="time">
+
+                                                    <h1 class="time__heading">Heure de début :</h1>
+
+                                                    <div class="time__input">
+
+                                                        <input type="text" id="duree" name="duree" class="timepicker" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="time">
+
+                                                    <h1 class="time__heading">Heure de Fin :</h1>
+
+                                                    <div class="time__input">
+
+                                                        <input type="text" id="duree2" name="duree2"
+                                                            class="timepicker2" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <input type="text" class="form-control hidden" id="diff" placeholder=""
+                                            name="date" value="">
+                                        </div>
+                                        <div class="flex space-x-2 justify-center">
+                                            <button name="save" value="Save to database" id="butsave"
+                                                class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save</button>
+                                        </div>
+                                      
                                     </form>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="calendar--view" id="calendar-view">
@@ -152,9 +189,27 @@
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script>
+                function mafonction() {
+                    let start = document.getElementById('duree').value.split(':');
+                    let end = document.getElementById('duree2').value.split(':');
+                    
+                    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+                    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+                    var diff = endDate.getTime() - startDate.getTime();
+                    var hours = Math.floor(diff / 1000 / 60 / 60);
+                    diff -= hours * 1000 * 60 * 60;
+                    var minutes = Math.floor(diff / 1000 / 60);
+                    
+                    document.getElementById("diff").value = (hours < 9 ? "0" : "") + hours + ':' + (minutes < 9 ? "0" : "") + minutes;
+            
+                }
+                
+               
                 $(document).ready(function () {
+                  
                     $('#butsave').on('click', function () {
-                        var duree = $('#duree').val();
+                        mafonction();
+                        var duree = $('#diff').val();
                         var date = $('#date').val();
                         var taux = $('#taux').val();
 
@@ -185,5 +240,6 @@
 
             <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 </body>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 
 </html>
