@@ -114,8 +114,8 @@
                                     <select name="Affichage"
                                         class="h-8 px-2 py-1 mx-1 my-1 text-center rounded my_select md:text-sm border"
                                         id="selectfilter" onchange="runget(this.value)">
-                                        <option id="optionx" value="month">mois</option>
                                         <option id="optionx" value="week" selected>Semaine</option>
+                                        <option id="optionx" value="month">mois</option>
                                     </select>
                                 </div>
 
@@ -320,7 +320,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                     axisX: {
                         titleFontSize: 20,
                         interval: 1,
-                        intervalType: "month",
+                        intervalType: "day",
                         valueFormatString: "DD MMM"
                     },
                     data: [{
@@ -418,7 +418,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 const obj = JSON.parse(text);
                 let textFromJSON = obj;
                 textFromJSON.forEach(appendNewThing)
-                textFromJSON.forEach(calculate)
+             
 
                 function appendNewThing(jsonTxt) {
                     //Temps de travail 
@@ -480,7 +480,7 @@ fetch(apiweek)
         textFromJSON.forEach(calculatetoday)
 
         function appendNewThing(jsonTxt) {
-            document.getElementById("today-container").innerHTML = calculatetoday() + " €";
+            document.getElementById("today-container").innerHTML = Math.round(calculatetoday()) + " €";
         }
 
         function calculatetoday(jsonTxt) {
@@ -505,7 +505,7 @@ fetch(apiweek)
         textFromJSON.forEach(calculatew)
 
         function appendNewThing(jsonTxt) {
-            document.getElementById("total-container").innerHTML = calculatew() + " €";
+            document.getElementById("total-container").innerHTML = Math.round(calculatew()) + " €";
         }
 
         function calculatew(jsonTxt) {
@@ -530,7 +530,7 @@ fetch(apiweek)
         textFromJSON.forEach(calculatex)
 
         function appendNewThing(jsonTxt) {
-            document.getElementById("week-container").innerHTML = calculatex() + " €";
+            document.getElementById("week-container").innerHTML = Math.round(calculatex()) + " €";
         }
 
         function calculatex(jsonTxt) {
@@ -555,7 +555,7 @@ fetch(apiweek)
         textFromJSON.forEach(calculatez)
 
         function appendNewThing(jsonTxt) {
-            document.getElementById("total-container").innerHTML = calculatez() + " €";
+            document.getElementById("total-container").innerHTML = Math.round(calculatez()) + " €";
         }
 
         function calculatez(jsonTxt) {

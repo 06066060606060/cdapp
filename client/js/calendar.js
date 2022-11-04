@@ -3,8 +3,9 @@
 
 
 
+
 function CalendarApp(date) {
- mydatemod = [];
+let mydatemod = {};
  jsone();
 function jsone() {
   let url = "http://cdapp.test:88/api";
@@ -19,14 +20,15 @@ function jsone() {
     })
 
     function appendNewThing(jsonTxt) {
-        mydatemod.push(jsonTxt.date.split('-').reverse().join(', '));
+      mydatemod = (jsonTxt.date.split('-').join(', '));
+     
     }
+    console.log(mydatemod);
 }
  
 
- console.log(mydatemod);
 
-  this.aptDates = [new Date(2022, 10, 12).toString()]; // original
+  this.aptDates = [new Date().toString()]; // original
 
   if (!(date instanceof Date)) {
     date = new Date();
